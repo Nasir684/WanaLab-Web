@@ -2,61 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
     <!-- Primary SEO -->
-    <title>WanaLab - 9 Offline Tools - Engineered in WANA</title>
-    <meta name="description" content="WanaLab.pk - Independent Research Lab, WANA. 9 Prime Tools: Age, Word, Percentage, Image, PDF, QR, Resume, Currency, Travel. Offline, Private, No Upload. Built in Wana, Used Worldwide." />
-    <meta name="keywords" content="WanaLab, WanaLab.pk, Wana tools, DI Khan tools, Age calculator, Word counter, PDF viewer, QR code, Image compressor, Offline tools Pakistan" />
-    <meta name="author" content="WanaLab.pk - Independent Research Lab, WANA" />
+    <title>WanaLab.pk - Independent Research Lab, WANA - Offline Tools</title>
+    <meta name="description" content="WanaLab.pk - 9 Prime offline tools: Age Prime, Word Prime, Image Prime, PDF Prime. No upload, 100% private. Sports Hub PSL IPL EPL. Engineered in WANA, Used Worldwide." />
+    <meta name="keywords" content="WanaLab, Wana tools, DI Khan tools, Age calculator offline, Word counter offline, Image compress 20KB, PDF viewer offline, PSL live, WanaLab APK" />
+    <meta name="author" content="WanaLab - WANA" />
 
-    <!-- PWA - Lock 3 -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="WanaLab" />
+    <!-- PWA - Lock 8 Mobile APK Alternative -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="WanaLab">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="WanaLab - 9 Offline Tools - Engineered in WANA" />
-    <meta property="og:description" content="9 Prime Tools - Offline, Private, No Upload. Built in Wana, Used Worldwide." />
+    <!-- WhatsApp / Facebook / TikTok Share Preview - Lock 6 Discovery -->
+    <meta property="og:title" content="WanaLab.pk - Offline Tools - Engineered in WANA" />
+    <meta property="og:description" content="9 Prime Tools Offline - Age, Word, Image 20KB, PDF Vault, PSL Live. No upload, Private. Built in Wana." />
+    <meta property="og:image" content="https://wanalab.pk/icon-512.png" />
+    <meta property="og:url" content="https://wanalab.pk" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wanalab-web.pages.dev" />
-    <meta property="og:image" content="/vite.svg" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WanaLab.pk - Offline Tools" />
+    <meta name="twitter:description" content="Built in Wana, Used Worldwide - 9 Offline Tools + Sports Hub" />
+    <meta name="twitter:image" content="https://wanalab.pk/icon-512.png" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="WanaLab - Engineered in WANA" />
-    <meta name="twitter:description" content="9 offline tools for Wana & DI Khan - Vault safe" />
+    <!-- AdSense Placeholder - Lock 5 Earning - Add your ID later -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
 
     <style>
-      /* Loading screen before React */
-      #loading {
-        position: fixed; inset: 0; background: #f8f9fa; display: flex; align-items: center; justify-content: center; z-index: 9999;
-      }
-      #loading div { text-align: center; }
-      #loading h1 { font-size: 32px; font-weight: 900; margin: 0; }
-      #loading p { color: #666; margin-top: 8px; font-size: 14px; }
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f8f9fa;color:#111;-webkit-tap-highlight-color:transparent}
+      #root{min-height:100vh}
     </style>
   </head>
   <body>
-    <div id="loading">
-      <div>
-        <h1>WanaLab</h1>
-        <p>Loading 9 Primes... Engineered in WANA</p>
-      </div>
-    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- PWA Service Worker Register - Makes offline work -->
     <script>
-      // Hide loading when app loads
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          const l = document.getElementById('loading');
-          if (l) l.style.display = 'none';
-        }, 500);
-      });
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(()=>{});
+        });
+      }
     </script>
   </body>
 </html>
