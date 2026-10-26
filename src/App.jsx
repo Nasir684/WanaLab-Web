@@ -19,7 +19,10 @@ import PslPrime from "./pages/PslPrime";
 import IplPrime from "./pages/IplPrime";
 import EplPrime from "./pages/EplPrime";
 
-// Home - 40 Tools Global
+// + NEW: Dashboard
+import Dashboard from "./pages/Dashboard";
+
+// Home - 40 Tools Global + Founder
 function Home() {
   const tools = [
     // 9 Original Prime
@@ -75,8 +78,13 @@ function Home() {
   return (
     <div className="max-w-md mx-auto p-4 bg-[#f8f9fa] min-h-screen">
       <div className="bg-black text-white p-6 rounded-[24px] mb-4">
-        <h1 className="text-3xl font-black tracking-tight">WanaLab</h1>
-        <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab • Privacy First</p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-black tracking-tight">WanaLab</h1>
+            <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab • Privacy First</p>
+          </div>
+          <Link to="/dashboard" className="bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full">Dashboard</Link>
+        </div>
         <p className="text-[11px] mt-3 bg-white/10 inline-block px-3 py-1 rounded-full">40 Tools • 100% Offline • Global</p>
       </div>
 
@@ -92,8 +100,22 @@ function Home() {
         ))}
       </div>
 
-      <div className="text-center mt-8 pb-4">
-        <p className="text-[10px] text-gray-400 uppercase tracking-widest">wanalab-web.pages.dev • No Upload • Private • Global</p>
+      {/* Founder & Developer Section */}
+      <div className="bg-black text-white rounded-[24px] p-5 mt-6">
+        <p className="text-[10px] uppercase tracking-widest opacity-60 font-bold">Founder & Developer</p>
+        <div className="flex gap-3 items-center mt-3">
+          <div className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-black">NK</div>
+          <div>
+            <p className="font-bold text-[16px]">Nasir Khan</p>
+            <p className="text-[11px] opacity-70">Founder & Developer • WanaLab</p>
+          </div>
+        </div>
+        <p className="text-[11px] opacity-60 mt-3 leading-relaxed">Privacy-first tools engineered for global users. 40+ offline utilities, zero data collection, built with independent research.</p>
+        <Link to="/dashboard" className="mt-3 inline-block bg-white text-black text-[11px] font-bold px-4 py-2 rounded-full">View Dashboard</Link>
+      </div>
+
+      <div className="text-center mt-6 pb-4">
+        <p className="text-[10px] text-gray-400 uppercase tracking-widest">© 2026 WanaLab • Nasir Khan • wanalab-web.pages.dev • Private • Global</p>
       </div>
     </div>
   );
@@ -104,6 +126,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         
         {/* Original 9 */}
         <Route path="/age-prime" element={<AgePrime />} />
@@ -162,4 +185,4 @@ export default function App() {
       </Routes>
     </Router>
   );
-    }
+     }
