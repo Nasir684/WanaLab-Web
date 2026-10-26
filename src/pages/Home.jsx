@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const tools = [
-    // 9 Original Prime
     { name: "Age Prime", link: "/age-prime", desc: "Exact age live seconds", cat: "Prime" },
     { name: "Word Prime", link: "/word-prime", desc: "Thesis safe counter", cat: "Prime" },
     { name: "Percent Prime", link: "/percent-prime", desc: "% Calculator", cat: "Prime" },
@@ -12,8 +11,6 @@ export default function Home() {
     { name: "Resume Prime", link: "/resume-prime", desc: "Resume Builder", cat: "Prime" },
     { name: "Currency Prime", link: "/currency-prime", desc: "Currency Converter", cat: "Prime" },
     { name: "Travel Prime", link: "/travel-prime", desc: "Distance & Time", cat: "Prime" },
-
-    // 10 Global New
     { name: "BMI Prime", link: "/bmi-prime", desc: "Body Mass Index", cat: "Health" },
     { name: "EMI Prime", link: "/emi-prime", desc: "Loan EMI Calculator", cat: "Finance" },
     { name: "Zakat Prime", link: "/zakat-prime", desc: "Islamic 2.5% Zakat", cat: "Islamic" },
@@ -24,8 +21,6 @@ export default function Home() {
     { name: "Discount Prime", link: "/discount-prime", desc: "Discount Calculator", cat: "Finance" },
     { name: "Pregnancy Prime", link: "/pregnancy-prime", desc: "Due Date Calculator", cat: "Health" },
     { name: "Password Prime", link: "/password-prime", desc: "Strong Password Gen", cat: "Utility" },
-
-    // 21 More - Total 40
     { name: "Profit Margin Prime", link: "/profit-prime", desc: "Profit & Margin", cat: "Finance" },
     { name: "Tip Prime", link: "/tip-prime", desc: "Tip Calculator", cat: "Finance" },
     { name: "Salary Prime", link: "/salary-prime", desc: "Monthly to Hourly", cat: "Finance" },
@@ -47,16 +42,19 @@ export default function Home() {
     { name: "Interest Prime", link: "/interest-prime", desc: "Simple Interest", cat: "Finance" },
     { name: "Ratio Prime", link: "/ratio-prime", desc: "Ratio Calculator", cat: "Education" },
     { name: "Random Prime", link: "/random-prime", desc: "Random Number", cat: "Utility" },
-
-    // Sports
     { name: "Sports Hub", link: "/sports", desc: "PSL IPL EPL Live", cat: "Sports" },
   ];
 
   return (
     <div className="max-w-md mx-auto p-4 bg-[#f8f9fa] min-h-screen">
       <div className="bg-black text-white p-6 rounded-[24px] mb-4">
-        <h1 className="text-3xl font-black tracking-tight">WanaLab</h1>
-        <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab • Privacy First</p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-black tracking-tight">WanaLab</h1>
+            <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab • Privacy First</p>
+          </div>
+          <Link to="/dashboard" className="bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full">Dashboard</Link>
+        </div>
         <p className="text-[11px] mt-3 bg-white/10 inline-block px-3 py-1 rounded-full">40 Tools • 100% Offline • Global</p>
       </div>
 
@@ -72,9 +70,23 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="text-center mt-8 pb-4">
-        <p className="text-[10px] text-gray-400 uppercase tracking-widest">wanalab-web.pages.dev • No Upload • Private • Global • 40 Tools</p>
+      {/* Founder Section */}
+      <div className="bg-black text-white rounded-[24px] p-5 mt-6">
+        <p className="text-[10px] uppercase tracking-widest opacity-60 font-bold">Founder & Developer</p>
+        <div className="flex gap-3 items-center mt-3">
+          <div className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-black">NK</div>
+          <div>
+            <p className="font-bold">Nasir Khan</p>
+            <p className="text-[11px] opacity-70">Founder & Developer, WanaLab</p>
+          </div>
+        </div>
+        <p className="text-[11px] opacity-60 mt-3 leading-relaxed">Privacy-first tools engineered for global users. 40+ offline utilities, zero data collection, built with independent research.</p>
+        <Link to="/dashboard" className="mt-3 inline-block bg-white text-black text-[11px] font-bold px-4 py-2 rounded-full">View Dashboard</Link>
+      </div>
+
+      <div className="text-center mt-6 pb-4">
+        <p className="text-[10px] text-gray-400 uppercase tracking-widest">© 2026 WanaLab • Nasir Khan • wanalab-web.pages.dev</p>
       </div>
     </div>
   );
-              }
+      }
