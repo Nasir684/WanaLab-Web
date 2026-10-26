@@ -1,21 +1,96 @@
 {
-  "name": "WanaLab",
+  "name": "WanaLab.pk - Independent Research Lab, WANA",
   "short_name": "WanaLab",
-  "description": "Independent Research Lab, WANA - Offline Tools",
-  "start_url": "/",
+  "description": "9 Prime Offline Tools - Age, Word, Image 20KB, PDF Vault, QR, Resume + Sports Hub PSL IPL EPL - No Upload, 100% Private - Engineered in WANA",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "portrait-primary",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "categories": ["productivity", "utilities", "sports"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "https://wanalab.pk/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "https://wanalab.pk/icon-512.png",
+      "src": "/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Age Prime",
+      "short_name": "Age",
+      "description": "Exact age with live seconds",
+      "url": "/age-prime?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Image Prime",
+      "short_name": "Image",
+      "description": "Compress to 20KB 50KB",
+      "url": "/image-prime?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sports Hub",
+      "short_name": "Sports",
+      "description": "PSL IPL EPL Live",
+      "url": "/sports?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ]
 }
