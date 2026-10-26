@@ -2,16 +2,61 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WanaLab - 9 Offline Tools for Students & Shops | Wana & DI Khan</title>
-    <meta name="description" content="WanaLab - 9 offline tools: Word counter, Image compressor 20KB 50KB 200KB, PDF vault, QR with logo, Resume ATS, Currency, Travel PIA AirSial. 100% offline, no upload, vault safe. Built for Wana & DI Khan." />
-    <meta name="keywords" content="WanaLab, Wana tools, DI Khan tools, image compressor 20kb, pdf vault offline, resume ATS Pakistan" />
+
+    <!-- Primary SEO -->
+    <title>WanaLab - 9 Offline Tools - Engineered in WANA</title>
+    <meta name="description" content="WanaLab.pk - Independent Research Lab, WANA. 9 Prime Tools: Age, Word, Percentage, Image, PDF, QR, Resume, Currency, Travel. Offline, Private, No Upload. Built in Wana, Used Worldwide." />
+    <meta name="keywords" content="WanaLab, WanaLab.pk, Wana tools, DI Khan tools, Age calculator, Word counter, PDF viewer, QR code, Image compressor, Offline tools Pakistan" />
+    <meta name="author" content="WanaLab.pk - Independent Research Lab, WANA" />
+
+    <!-- PWA - Lock 3 -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#000000" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="WanaLab" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="WanaLab - 9 Offline Tools - Engineered in WANA" />
+    <meta property="og:description" content="9 Prime Tools - Offline, Private, No Upload. Built in Wana, Used Worldwide." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wanalab-web.pages.dev" />
+    <meta property="og:image" content="/vite.svg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="WanaLab - Engineered in WANA" />
+    <meta name="twitter:description" content="9 offline tools for Wana & DI Khan - Vault safe" />
+
+    <style>
+      /* Loading screen before React */
+      #loading {
+        position: fixed; inset: 0; background: #f8f9fa; display: flex; align-items: center; justify-content: center; z-index: 9999;
+      }
+      #loading div { text-align: center; }
+      #loading h1 { font-size: 32px; font-weight: 900; margin: 0; }
+      #loading p { color: #666; margin-top: 8px; font-size: 14px; }
+    </style>
   </head>
   <body>
+    <div id="loading">
+      <div>
+        <h1>WanaLab</h1>
+        <p>Loading 9 Primes... Engineered in WANA</p>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Hide loading when app loads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const l = document.getElementById('loading');
+          if (l) l.style.display = 'none';
+        }, 500);
+      });
+    </script>
   </body>
 </html>
