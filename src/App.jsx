@@ -1,3 +1,4 @@
+import Extra21Prime from "./pages/Extra21Prime";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Extra10Prime from "./pages/Extra10Prime";
 
