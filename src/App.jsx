@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Extra10Prime from "./pages/Extra10Prime";
 
-// --- Your Existing Primes (Keep your existing imports if different names) ---
+// --- Your Existing Primes ---
 import AgePrime from "./pages/AgePrime";
 import WordPrime from "./pages/WordPrime";
 import ImagePrime from "./pages/ImagePrime";
@@ -18,7 +18,7 @@ import PslPrime from "./pages/PslPrime";
 import IplPrime from "./pages/IplPrime";
 import EplPrime from "./pages/EplPrime";
 
-// Home Component
+// Home Component - GLOBAL VERSION
 function Home() {
   const tools = [
     // Original 9 Prime
@@ -29,18 +29,18 @@ function Home() {
     { name: "PDF Prime", link: "/pdf-prime", desc: "Offline PDF Vault", cat: "Prime" },
     { name: "QR Prime", link: "/qr-prime", desc: "QR Generator Offline", cat: "Prime" },
     { name: "Resume Prime", link: "/resume-prime", desc: "Resume Builder", cat: "Prime" },
-    { name: "Currency Prime", link: "/currency-prime", desc: "USD to PKR", cat: "Prime" },
+    { name: "Currency Prime", link: "/currency-prime", desc: "Currency Converter", cat: "Prime" },
     { name: "Travel Prime", link: "/travel-prime", desc: "Distance & Time", cat: "Prime" },
 
-    // New 10 Prime - Added Today
+    // New 10 Prime - Global
     { name: "BMI Prime", link: "/bmi-prime", desc: "Body Mass Index", cat: "Health" },
-    { name: "EMI Prime", link: "/emi-prime", desc: "Loan Monthly EMI", cat: "Finance" },
+    { name: "EMI Prime", link: "/emi-prime", desc: "Loan EMI Calculator", cat: "Finance" },
     { name: "Zakat Prime", link: "/zakat-prime", desc: "Islamic 2.5% Zakat", cat: "Islamic" },
-    { name: "GPA Prime", link: "/gpa-prime", desc: "Gomal University GPA", cat: "Education" },
-    { name: "Marla Prime", link: "/marla-prime", desc: "Marla to Kanal/M²", cat: "Local" },
-    { name: "Fuel Prime", link: "/fuel-prime", desc: "Wana to DIK Fuel Cost", cat: "Local" },
+    { name: "GPA Prime", link: "/gpa-prime", desc: "GPA 4.0 Calculator", cat: "Education" },
+    { name: "Area Prime", link: "/marla-prime", desc: "Area Unit Converter", cat: "Utility" },
+    { name: "Fuel Prime", link: "/fuel-prime", desc: "Fuel Cost Calculator", cat: "Utility" },
     { name: "Water Prime", link: "/water-prime", desc: "Daily Water Intake", cat: "Health" },
-    { name: "Discount Prime", link: "/discount-prime", desc: "Bazaar Discount", cat: "Finance" },
+    { name: "Discount Prime", link: "/discount-prime", desc: "Discount Calculator", cat: "Finance" },
     { name: "Pregnancy Prime", link: "/pregnancy-prime", desc: "Due Date Calculator", cat: "Health" },
     { name: "Password Prime", link: "/password-prime", desc: "Strong Password Gen", cat: "Utility" },
 
@@ -53,8 +53,8 @@ function Home() {
     <div className="max-w-md mx-auto p-4 bg-[#f8f9fa] min-h-screen">
       <div className="bg-black text-white p-6 rounded-[24px] mb-4">
         <h1 className="text-3xl font-black tracking-tight">WanaLab</h1>
-        <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab, WANA</p>
-        <p className="text-[11px] mt-3 bg-white/10 inline-block px-3 py-1 rounded-full">19 Tools • 100% Offline • Engineered in WANA</p>
+        <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab • Privacy First</p>
+        <p className="text-[11px] mt-3 bg-white/10 inline-block px-3 py-1 rounded-full">19 Tools • 100% Offline • Global</p>
       </div>
 
       <div className="grid grid-cols-1 gap-3">
@@ -116,4 +116,4 @@ export default function App() {
       </Routes>
     </Router>
   );
-}
+      }
