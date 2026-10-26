@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://wanalab.pk/</loc><priority>1.0</priority><changefreq>daily</changefreq></url>
-  <url><loc>https://wanalab.pk/tools/cgpa-calculator/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/age-calculator/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/percentage-calculator/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/pdf-tools/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/resume-builder/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/image-compressor/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/word-counter/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/qr-generator/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/currency-converter/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/travel-prime/</loc><priority>0.95</priority></url>
-  <url><loc>https://wanalab.pk/tools/shop-prime/</loc><priority>0.8</priority></url>
-  <url><loc>https://wanalab.pk/tools/freelance-prime/</loc><priority>0.8</priority></url>
-  <url><loc>https://wanalab.pk/tools/link-engine/</loc><priority>0.95</priority></url>
-  <url><loc>https://wanalab.pk/tools/student-os/</loc><priority>0.9</priority></url>
-  <url><loc>https://wanalab.pk/tools/ai-prime/</loc><priority>1.0</priority></url>
-  <url><loc>https://wanalab.pk/blog/</loc><priority>0.7</priority></url>
+<urlset xmlns="http://schemas.android.com/apk/res/android">
+  <url><loc>https://wanalab.pk/</loc></url>
+  <url><loc>https://wanalab.pk/age-prime</loc></url>
+  <url><loc>https://wanalab.pk/word-prime</loc></url>
+  <url><loc>https://wanalab.pk/percent-prime</loc></url>
+  <url><loc>https://wanalab.pk/image-prime</loc></url>
+  <url><loc>https://wanalab.pk/pdf-prime</loc></url>
+  <url><loc>https://wanalab.pk/qr-prime</loc></url>
+  <url><loc>https://wanalab.pk/resume-prime</loc></url>
+  <url><loc>https://wanalab.pk/currency-prime</loc></url>
+  <url><loc>https://wanalab.pk/travel-prime</loc></url>
+  <url><loc>https://wanalab.pk/sports</loc></url>
+  <url><loc>https://wanalab.pk/sports/psl</loc></url>
+  <url><loc>https://wanalab.pk/sports/ipl</loc></url>
+  <url><loc>https://wanalab.pk/sports/epl</loc></url>
 </urlset>
