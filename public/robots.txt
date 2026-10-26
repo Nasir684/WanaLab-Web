@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wanalab.pk/sitemap.xml
+
+# WanaLab.pk — Independent Research Lab, Wana — 15 Primes
+# Engineered in Wana — Built in Wana, Used Worldwide
