@@ -1,126 +1,119 @@
-import { Routes, Route, Link, useParams } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Extra10Prime from "./pages/Extra10Prime";
 
-// LOCK 1-9 Primes - Separate Files
-import AgePrime from './primes/AgePrime'
-import WordPrime from './primes/WordPrime'
-import PercentPrime from './primes/PercentPrime'
-import ImagePrime from './primes/ImagePrime'
-import PdfPrime from './primes/PdfPrime'
-import QrPrime from './primes/QrPrime'
-import ResumePrime from './primes/ResumePrime'
-import CurrencyPrime from './primes/CurrencyPrime'
-import TravelPrime from './primes/TravelPrime'
+// --- Your Existing Primes (Keep your existing imports if different names) ---
+import AgePrime from "./pages/AgePrime";
+import WordPrime from "./pages/WordPrime";
+import ImagePrime from "./pages/ImagePrime";
+import PdfPrime from "./pages/PdfPrime";
+import QrPrime from "./pages/QrPrime";
+import ResumePrime from "./pages/ResumePrime";
+import CurrencyPrime from "./pages/CurrencyPrime";
+import PercentPrime from "./pages/PercentPrime";
+import TravelPrime from "./pages/TravelPrime";
 
-// LOCK 5-6
-import { AdSpot, AffiliateWidget } from './components/Earning'
-import { ShareButton, SEOBottomText } from './components/Discovery'
+// Sports
+import SportsHub from "./pages/SportsHub";
+import PslPrime from "./pages/PslPrime";
+import IplPrime from "./pages/IplPrime";
+import EplPrime from "./pages/EplPrime";
 
-// LOCK 7 - Sports
-import SportsHub, { LeaguePage } from './sports/SportsHub'
-
-function Header() {
-  return (
-    <div style={{ background: 'black', color: 'white', padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
-      <Link to="/" style={{ color: 'white', textDecoration: 'none', fontWeight: '900', fontSize: '18px' }}>WanaLab</Link>
-      <Link to="/sports" style={{ color: 'black', background: '#25D366', padding: '6px 12px', borderRadius: '20px', textDecoration: 'none', fontWeight: '800', fontSize: '12px' }}>🏏 Sports</Link>
-    </div>
-  )
-}
-
-function PrimeList() {
+// Home Component
+function Home() {
   const tools = [
-    { path: '/age-prime', name: 'Age Prime', desc: 'Exact age with live seconds' },
-    { path: '/word-prime', name: 'Word Prime', desc: 'Thesis counter offline' },
-    { path: '/percent-prime', name: 'Percent Prime', desc: 'DI Khan % calc' },
-    { path: '/image-prime', name: 'Image Prime', desc: 'Compress to 20KB 50KB' },
-    { path: '/pdf-prime', name: 'PDF Prime', desc: 'Vault - No upload' },
-    { path: '/qr-prime', name: 'QR Prime', desc: 'QR maker offline' },
-    { path: '/resume-prime', name: 'Resume Prime', desc: 'CV maker' },
-    { path: '/currency-prime', name: 'Currency Prime', desc: 'PKR USD SAR' },
-    { path: '/travel-prime', name: 'Travel Prime', desc: 'Wana to DIK distance' },
-    { path: '/sports', name: '🏏 Sports Hub', desc: 'PSL IPL EPL Live', special: true },
-  ]
+    // Original 9 Prime
+    { name: "Age Prime", link: "/age-prime", desc: "Exact age live seconds", cat: "Prime" },
+    { name: "Word Prime", link: "/word-prime", desc: "Thesis safe counter", cat: "Prime" },
+    { name: "Percent Prime", link: "/percent-prime", desc: "% Calculator", cat: "Prime" },
+    { name: "Image Prime", link: "/image-prime", desc: "Compress to 20KB", cat: "Prime" },
+    { name: "PDF Prime", link: "/pdf-prime", desc: "Offline PDF Vault", cat: "Prime" },
+    { name: "QR Prime", link: "/qr-prime", desc: "QR Generator Offline", cat: "Prime" },
+    { name: "Resume Prime", link: "/resume-prime", desc: "Resume Builder", cat: "Prime" },
+    { name: "Currency Prime", link: "/currency-prime", desc: "USD to PKR", cat: "Prime" },
+    { name: "Travel Prime", link: "/travel-prime", desc: "Distance & Time", cat: "Prime" },
+
+    // New 10 Prime - Added Today
+    { name: "BMI Prime", link: "/bmi-prime", desc: "Body Mass Index", cat: "Health" },
+    { name: "EMI Prime", link: "/emi-prime", desc: "Loan Monthly EMI", cat: "Finance" },
+    { name: "Zakat Prime", link: "/zakat-prime", desc: "Islamic 2.5% Zakat", cat: "Islamic" },
+    { name: "GPA Prime", link: "/gpa-prime", desc: "Gomal University GPA", cat: "Education" },
+    { name: "Marla Prime", link: "/marla-prime", desc: "Marla to Kanal/M²", cat: "Local" },
+    { name: "Fuel Prime", link: "/fuel-prime", desc: "Wana to DIK Fuel Cost", cat: "Local" },
+    { name: "Water Prime", link: "/water-prime", desc: "Daily Water Intake", cat: "Health" },
+    { name: "Discount Prime", link: "/discount-prime", desc: "Bazaar Discount", cat: "Finance" },
+    { name: "Pregnancy Prime", link: "/pregnancy-prime", desc: "Due Date Calculator", cat: "Health" },
+    { name: "Password Prime", link: "/password-prime", desc: "Strong Password Gen", cat: "Utility" },
+
+    // Sports
+    { name: "Sports Hub", link: "/sports", desc: "PSL IPL EPL Live", cat: "Sports" },
+    { name: "PSL Prime", link: "/sports/psl", desc: "PSL 2026 Live Table", cat: "Sports" },
+  ];
 
   return (
-    <div style={{ padding: '16px', maxWidth: '600px', margin: '0 auto' }}>
-      <div style={{ background: 'black', color: 'white', padding: '20px', borderRadius: '20px' }}>
-        <h1 style={{ margin: 0, fontSize: '26px', fontWeight: '900' }}>WanaLab.pk</h1>
-        <p style={{ margin: '6px 0 0', fontSize: '12px', opacity: 0.7 }}>Independent Research Lab, WANA<br/>Built in Wana, Used Worldwide</p>
+    <div className="max-w-md mx-auto p-4 bg-[#f8f9fa] min-h-screen">
+      <div className="bg-black text-white p-6 rounded-[24px] mb-4">
+        <h1 className="text-3xl font-black tracking-tight">WanaLab</h1>
+        <p className="text-xs opacity-70 mt-1 tracking-widest uppercase">Independent Research Lab, WANA</p>
+        <p className="text-[11px] mt-3 bg-white/10 inline-block px-3 py-1 rounded-full">19 Tools • 100% Offline • Engineered in WANA</p>
       </div>
 
-      <AdSpot position="HEADER" />
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '16px' }}>
-        {tools.map(t => (
-          <Link key={t.path} to={t.path} style={{ background: t.special ? '#01411c' : 'white', color: t.special ? 'white' : 'black', padding: '14px', borderRadius: '16px', border: '1px solid #eee', textDecoration: 'none' }}>
-            <div style={{ fontWeight: '800', fontSize: '13px' }}>{t.name}</div>
-            <div style={{ fontSize: '11px', opacity: 0.8, marginTop: '4px' }}>{t.desc}</div>
+      <div className="grid grid-cols-1 gap-3">
+        {tools.map((t) => (
+          <Link key={t.link} to={t.link} className="bg-white p-4 rounded-2xl border border-black/5 flex justify-between items-center active:scale-[0.98] shadow-sm">
+            <div>
+              <p className="font-bold text-[15px]">{t.name}</p>
+              <p className="text-[11px] text-gray-500">{t.desc}</p>
+            </div>
+            <span className="text-[9px] bg-black text-white px-2 py-1 rounded-full uppercase">{t.cat}</span>
           </Link>
         ))}
       </div>
 
-      <AdSpot position="BETWEEN" />
-      <AffiliateWidget />
-      <AdSpot position="FOOTER" />
-
-      <div style={{ textAlign: 'center', fontSize: '10px', color: '#aaa', marginTop: '20px', padding: '12px' }}>
-        © 2026 WanaLab.pk - Engineered in WANA - Offline • Private • No Upload
+      <div className="text-center mt-8 pb-4">
+        <p className="text-[10px] text-gray-400 uppercase tracking-widest">wanalab-web.pages.dev • No Upload • Private</p>
       </div>
     </div>
-  )
-}
-
-function ToolWrapper({ children, name, path }) {
-  return (
-    <div style={{ background: '#f8f9fa', minHeight: '100vh' }}>
-      <div style={{ padding: '12px 16px' }}>
-        <Link to="/" style={{ textDecoration: 'none', color: 'black', fontSize: '13px', fontWeight: '700' }}>← Back</Link>
-      </div>
-      {children}
-      <div style={{ maxWidth: '500px', margin: '0 auto', padding: '0 16px 20px' }}>
-        <ShareButton toolName={name} path={path} />
-        <AdSpot position={`${name} - Middle`} />
-        <SEOBottomText toolName={name} />
-        <AffiliateWidget />
-      </div>
-    </div>
-  )
-}
-
-function SportsPageWrapper(){
-  const { leagueId } = useParams()
-  return (
-    <div style={{ background: '#f8f9fa', minHeight: '100vh' }}>
-      <div style={{ padding: '12px 16px' }}>
-        <Link to="/sports" style={{ textDecoration: 'none', color: 'black', fontSize: '13px', fontWeight: '700' }}>← Back to Sports</Link>
-      </div>
-      <LeaguePage league={leagueId} />
-      <div style={{ maxWidth: '500px', margin: '0 auto', padding: '0 16px 20px' }}>
-        <ShareButton toolName={`${leagueId} Live`} path={`/sports/${leagueId}`} />
-        <AdSpot position="Sports Footer" />
-      </div>
-    </div>
-  )
+  );
 }
 
 export default function App() {
   return (
-    <>
-      <Header />
+    <Router>
       <Routes>
-        <Route path="/" element={<PrimeList />} />
-        <Route path="/age-prime" element={<ToolWrapper name="Age Prime" path="/age-prime"><AgePrime /></ToolWrapper>} />
-        <Route path="/word-prime" element={<ToolWrapper name="Word Prime" path="/word-prime"><WordPrime /></ToolWrapper>} />
-        <Route path="/percent-prime" element={<ToolWrapper name="Percent Prime" path="/percent-prime"><PercentPrime /></ToolWrapper>} />
-        <Route path="/image-prime" element={<ToolWrapper name="Image Prime" path="/image-prime"><ImagePrime /></ToolWrapper>} />
-        <Route path="/pdf-prime" element={<ToolWrapper name="PDF Prime" path="/pdf-prime"><PdfPrime /></ToolWrapper>} />
-        <Route path="/qr-prime" element={<ToolWrapper name="QR Prime" path="/qr-prime"><QrPrime /></ToolWrapper>} />
-        <Route path="/resume-prime" element={<ToolWrapper name="Resume Prime" path="/resume-prime"><ResumePrime /></ToolWrapper>} />
-        <Route path="/currency-prime" element={<ToolWrapper name="Currency Prime" path="/currency-prime"><CurrencyPrime /></ToolWrapper>} />
-        <Route path="/travel-prime" element={<ToolWrapper name="Travel Prime" path="/travel-prime"><TravelPrime /></ToolWrapper>} />
+        <Route path="/" element={<Home />} />
+        
+        {/* Original 9 */}
+        <Route path="/age-prime" element={<AgePrime />} />
+        <Route path="/word-prime" element={<WordPrime />} />
+        <Route path="/percent-prime" element={<PercentPrime />} />
+        <Route path="/image-prime" element={<ImagePrime />} />
+        <Route path="/pdf-prime" element={<PdfPrime />} />
+        <Route path="/qr-prime" element={<QrPrime />} />
+        <Route path="/resume-prime" element={<ResumePrime />} />
+        <Route path="/currency-prime" element={<CurrencyPrime />} />
+        <Route path="/travel-prime" element={<TravelPrime />} />
+
+        {/* New 10 */}
+        <Route path="/bmi-prime" element={<Extra10Prime type="bmi" />} />
+        <Route path="/emi-prime" element={<Extra10Prime type="emi" />} />
+        <Route path="/fuel-prime" element={<Extra10Prime type="fuel" />} />
+        <Route path="/zakat-prime" element={<Extra10Prime type="zakat" />} />
+        <Route path="/gpa-prime" element={<Extra10Prime type="gpa" />} />
+        <Route path="/marla-prime" element={<Extra10Prime type="marla" />} />
+        <Route path="/water-prime" element={<Extra10Prime type="water" />} />
+        <Route path="/discount-prime" element={<Extra10Prime type="discount" />} />
+        <Route path="/pregnancy-prime" element={<Extra10Prime type="pregnancy" />} />
+        <Route path="/password-prime" element={<Extra10Prime type="password" />} />
+
+        {/* Sports */}
         <Route path="/sports" element={<SportsHub />} />
-        <Route path="/sports/:leagueId" element={<SportsPageWrapper />} />
+        <Route path="/sports/psl" element={<PslPrime />} />
+        <Route path="/sports/ipl" element={<IplPrime />} />
+        <Route path="/sports/epl" element={<EplPrime />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Home />} />
       </Routes>
-    </>
-  )
-        }
+    </Router>
+  );
+}
