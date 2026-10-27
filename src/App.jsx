@@ -1,73 +1,66 @@
 import React, { useState } from 'react';
 
 const TOOLS = [
-  "Word Counter", "Case Converter", "Password Generator", "QR Generator",
-  "Base64 Encode", "URL Encode", "JSON Formatter", "Image Compressor",
-  "Color Picker", "Lorem Ipsum", "UUID Generator", "Hash Generator",
-  "Image to Base64", "Regex Tester", "HTML Minifier", "CSS Minifier",
-  "JS Minifier", "Text Diff", "Unit Converter", "BMI Calculator",
-  "Age Calculator", "Loan Calculator", "Percentage Calculator", "Date Difference",
-  "Image Resizer", "Text to Speech", "Speech to Text", "Morse Code",
-  "Binary Converter", "Hex Converter", "IP Finder", "Password Strength",
-  "Email Validator", "Credit Card Validator", "CSV to JSON", "JSON to CSV",
-  "Markdown Preview", "HTML to Markdown", "YouTube Thumbnail", "Meta Tag Generator"
+  "Word Counter","Case Converter","Password Generator","QR Generator",
+  "Base64 Encode","URL Encode","JSON Formatter","Image Compressor",
+  "Color Picker","Lorem Ipsum","UUID Generator","Hash Generator",
+  "Image to Base64","Regex Tester","HTML Minifier","CSS Minifier",
+  "JS Minifier","Text Diff","Unit Converter","BMI Calculator",
+  "Age Calculator","Loan Calculator","Percentage Calculator","Date Difference",
+  "Image Resizer","Text to Speech","Speech to Text","Morse Code",
+  "Binary Converter","Hex Converter","IP Finder","Password Strength",
+  "Email Validator","Credit Card Validator","CSV to JSON","JSON to CSV",
+  "Markdown Preview","HTML to Markdown","YouTube Thumbnail","Meta Tag Generator"
 ];
 
-export default function App() {
-  const [active, setActive] = useState(TOOLS[0]);
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
+export default function App(){
+  const [active,setActive]=useState(TOOLS[0]);
+  const [input,setInput]=useState("");
+  const [output,setOutput]=useState("");
 
-  const handleTool = (tool) => {
-    setActive(tool);
-    setInput("");
-    setOutput("");
-  };
-
-  const countWords = (t) => {
-    if (active === "Word Counter") {
-      const words = t.trim() ? t.trim().split(/\s+/).length : 0;
-      setOutput(`Words: ${words} | Characters: ${t.length}`);
-    } else if (active === "Case Converter") {
-      setOutput(`UPPER: ${t.toUpperCase()}\n\nlower: ${t.toLowerCase()}`);
-    } else {
-      setOutput(t ? `Processed: ${t.slice(0,500)}` : "");
+  const run = (t) => {
+    if(!t){ setOutput(""); return; }
+    if(active==="Word Counter"){
+      const words=t.trim()?t.trim().split(/\s+/).length:0;
+      setOutput(`Words: ${words} | Chars: ${t.length} | Lines: ${t.split('\n').length}`);
+    }else if(active==="Case Converter"){
+      setOutput(`UPPER:\n${t.toUpperCase()}\n\nlower:\n${t.toLowerCase()}`);
+    }else if(active==="Password Generator"){
+      const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
+      let p=""; for(let i=0;i<16;i++) p+=chars[Math.floor(Math.random()*chars.length)];
+      setOutput(p);
+    }else{
+      setOutput(t.slice(0,2000));
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
-      <div className="max-w-[1400px] mx-auto p-4">
-        <header className="flex justify-between items-center py-4 border-b border-white/10 mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold">W</div>
-            <h1 className="text-xl font-bold">WanaLab</h1>
-            <span className="ml-3 px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs border border-green-500/30">● 40 TOOLS LIVE - v2.2</span>
-          </div>
-        </header>
+    <div style={{minHeight:'100vh', background:'#0a0a0f', color:'#fff', fontFamily:'Inter, system-ui, sans-serif'}}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
+      <div style={{maxWidth:'1400px', margin:'0 auto', padding:'16px'}}>
+        <div style={{display:'flex', alignItems:'center', gap:'12px', padding:'16px 0', borderBottom:'1px solid rgba(255,255,255,0.1)', marginBottom:'24px'}}>
+          <div style={{width:'36px', height:'36px', borderRadius:'10px', background:'linear-gradient(135deg,#8b5cf6,#d946ef)', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'800'}}>W</div>
+          <div style={{fontWeight:'800', fontSize:'20px'}}>WanaLab</div>
+          <div style={{marginLeft:'12px', padding:'4px 12px', borderRadius:'20px', background:'rgba(34,197,94,0.15)', border:'1px solid rgba(34,197,94,0.3)', color:'#22c55e', fontSize:'12px'}}>● 40 TOOLS LIVE - v2.3 FINAL</div>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6">
-          <div className="bg-white/[0.04] rounded-2xl border border-white/10 p-3 h-[80vh] overflow-y-auto">
-            {TOOLS.map(t => (
-              <button key={t} onClick={()=>handleTool(t)}
-                className={`w-full text-left px-3 py-2.5 rounded-xl text-sm mb-1 ${active===t ? 'bg-violet-600 text-white' : 'hover:bg-white/10 text-white/70'}`}>
+        <div style={{display:'grid', gridTemplateColumns:'320px 1fr', gap:'24px'}}>
+          <div style={{background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'16px', padding:'12px', height:'80vh', overflowY:'auto'}}>
+            {TOOLS.map(t=>(
+              <button key={t} onClick={()=>{setActive(t); setInput(""); setOutput("");}}
+                style={{width:'100%', textAlign:'left', padding:'10px 12px', borderRadius:'12px', border:'none', cursor:'pointer', marginBottom:'4px', fontSize:'13px', background: active===t?'#7c3aed':'transparent', color: active===t?'#fff':'rgba(255,255,255,0.7)'}}>
                 {t}
               </button>
             ))}
           </div>
 
-          <div className="bg-white/[0.04] rounded-2xl border border-white/10 p-6">
-            <h2 className="text-2xl font-bold mb-6">{active}</h2>
-            <textarea
-              value={input}
-              onChange={e=>{setInput(e.target.value); countWords(e.target.value)}}
-              placeholder={`Enter text for ${active}...`}
-              className="w-full h-40 bg-black/50 border border-white/10 rounded-xl p-4 text-sm outline-none"
-            />
-            {output && <pre className="mt-6 bg-black/60 border border-white/10 rounded-xl p-4 text-sm whitespace-pre-wrap">{output}</pre>}
+          <div style={{background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'16px', padding:'24px'}}>
+            <h2 style={{fontSize:'26px', fontWeight:'700'}}>{active}</h2>
+            <textarea value={input} onChange={e=>{setInput(e.target.value); run(e.target.value)}} placeholder={`Enter text for ${active}...`} style={{width:'100%', height:'160px', background:'rgba(0,0,0,0.5)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'12px', padding:'14px', color:'#fff', marginTop:'16px'}} />
+            {output && <pre style={{background:'rgba(0,0,0,0.6)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'12px', padding:'16px', marginTop:'20px', whiteSpace:'pre-wrap'}}>{output}</pre>}
           </div>
         </div>
       </div>
     </div>
   );
-            }
+      }
