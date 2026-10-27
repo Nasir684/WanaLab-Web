@@ -2,30 +2,32 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Extra10Prime from "./pages/Extra10Prime";
 import Extra21Prime from "./pages/Extra21Prime";
 
-// --- Original 9 Primes ---
-import AgePrime from "./pages/AgePrime";
-import WordPrime from "./pages/WordPrime";
-import ImagePrime from "./pages/ImagePrime";
-import PdfPrime from "./pages/PdfPrime";
-import QrPrime from "./pages/QrPrime";
-import ResumePrime from "./pages/ResumePrime";
-import CurrencyPrime from "./pages/CurrencyPrime";
-import PercentPrime from "./pages/PercentPrime";
-import TravelPrime from "./pages/TravelPrime";
+// --- Original 9 Primes — FIXED PATH to ./primes/ ---
+import AgePrime from "./primes/AgePrime";
+import WordPrime from "./primes/WordPrime";
+import ImagePrime from "./primes/ImagePrime";
+import PdfPrime from "./primes/PdfPrime";
+import QrPrime from "./primes/QrPrime";
+import ResumePrime from "./primes/ResumePrime";
+import CurrencyPrime from "./primes/CurrencyPrime";
+import PercentPrime from "./primes/PercentPrime";
+import TravelPrime from "./primes/TravelPrime";
 
-// Sports
-import SportsHub from "./pages/SportsHub";
+// Sports — FIXED
 import PslPrime from "./pages/PslPrime";
 import IplPrime from "./pages/IplPrime";
 import EplPrime from "./pages/EplPrime";
+import SportsSuper from "./systems/SportsSuper";
 
-// + NEW: Dashboard
+// Make SportsHub from SportsSuper
+const SportsHub = SportsSuper;
+
+// + Dashboard
 import Dashboard from "./pages/Dashboard";
 
 // Home - 40 Tools Global + Founder
 function Home() {
   const tools = [
-    // 9 Original Prime
     { name: "Age Prime", link: "/age-prime", desc: "Exact age live seconds", cat: "Prime" },
     { name: "Word Prime", link: "/word-prime", desc: "Thesis safe counter", cat: "Prime" },
     { name: "Percent Prime", link: "/percent-prime", desc: "% Calculator", cat: "Prime" },
@@ -35,8 +37,6 @@ function Home() {
     { name: "Resume Prime", link: "/resume-prime", desc: "Resume Builder", cat: "Prime" },
     { name: "Currency Prime", link: "/currency-prime", desc: "Currency Converter", cat: "Prime" },
     { name: "Travel Prime", link: "/travel-prime", desc: "Distance & Time", cat: "Prime" },
-
-    // 10 Global New
     { name: "BMI Prime", link: "/bmi-prime", desc: "Body Mass Index", cat: "Health" },
     { name: "EMI Prime", link: "/emi-prime", desc: "Loan EMI Calculator", cat: "Finance" },
     { name: "Zakat Prime", link: "/zakat-prime", desc: "Islamic 2.5% Zakat", cat: "Islamic" },
@@ -47,8 +47,6 @@ function Home() {
     { name: "Discount Prime", link: "/discount-prime", desc: "Discount Calculator", cat: "Finance" },
     { name: "Pregnancy Prime", link: "/pregnancy-prime", desc: "Due Date Calculator", cat: "Health" },
     { name: "Password Prime", link: "/password-prime", desc: "Strong Password Gen", cat: "Utility" },
-
-    // 21 More - Total 40
     { name: "Profit Margin Prime", link: "/profit-prime", desc: "Profit & Margin", cat: "Finance" },
     { name: "Tip Prime", link: "/tip-prime", desc: "Tip Calculator", cat: "Finance" },
     { name: "Salary Prime", link: "/salary-prime", desc: "Monthly to Hourly", cat: "Finance" },
@@ -70,8 +68,6 @@ function Home() {
     { name: "Interest Prime", link: "/interest-prime", desc: "Simple Interest", cat: "Finance" },
     { name: "Ratio Prime", link: "/ratio-prime", desc: "Ratio Calculator", cat: "Education" },
     { name: "Random Prime", link: "/random-prime", desc: "Random Number", cat: "Utility" },
-
-    // Sports Hub
     { name: "Sports Hub", link: "/sports", desc: "PSL IPL EPL Live", cat: "Sports" },
   ];
 
@@ -100,7 +96,6 @@ function Home() {
         ))}
       </div>
 
-      {/* Founder & Developer Section */}
       <div className="bg-black text-white rounded-[24px] p-5 mt-6">
         <p className="text-[10px] uppercase tracking-widest opacity-60 font-bold">Founder & Developer</p>
         <div className="flex gap-3 items-center mt-3">
@@ -127,8 +122,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        
-        {/* Original 9 */}
         <Route path="/age-prime" element={<AgePrime />} />
         <Route path="/word-prime" element={<WordPrime />} />
         <Route path="/percent-prime" element={<PercentPrime />} />
@@ -138,8 +131,6 @@ export default function App() {
         <Route path="/resume-prime" element={<ResumePrime />} />
         <Route path="/currency-prime" element={<CurrencyPrime />} />
         <Route path="/travel-prime" element={<TravelPrime />} />
-
-        {/* New 10 - Global */}
         <Route path="/bmi-prime" element={<Extra10Prime type="bmi" />} />
         <Route path="/emi-prime" element={<Extra10Prime type="emi" />} />
         <Route path="/fuel-prime" element={<Extra10Prime type="fuel" />} />
@@ -150,8 +141,6 @@ export default function App() {
         <Route path="/discount-prime" element={<Extra10Prime type="discount" />} />
         <Route path="/pregnancy-prime" element={<Extra10Prime type="pregnancy" />} />
         <Route path="/password-prime" element={<Extra10Prime type="password" />} />
-
-        {/* 21 More - Total 40 */}
         <Route path="/profit-prime" element={<Extra21Prime type="profit" />} />
         <Route path="/tip-prime" element={<Extra21Prime type="tip" />} />
         <Route path="/salary-prime" element={<Extra21Prime type="salary" />} />
@@ -173,16 +162,12 @@ export default function App() {
         <Route path="/interest-prime" element={<Extra21Prime type="interest" />} />
         <Route path="/ratio-prime" element={<Extra21Prime type="ratio" />} />
         <Route path="/random-prime" element={<Extra21Prime type="random" />} />
-
-        {/* Sports */}
         <Route path="/sports" element={<SportsHub />} />
         <Route path="/sports/psl" element={<PslPrime />} />
         <Route path="/sports/ipl" element={<IplPrime />} />
         <Route path="/sports/epl" element={<EplPrime />} />
-
-        {/* Fallback */}
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   );
-     }
+          }
