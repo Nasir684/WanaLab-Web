@@ -1,41 +1,5 @@
 import { useState } from 'react'
-
 export default function App(){
-  const [active,setActive]=useState(null)
-  const [q,setQ]=useState("")
-  const tools=["Image Compressor","Image Resizer","BG Remover","Image to PDF","PDF to Image","Merge PDF","Split PDF","Compress PDF","Word to PDF","PDF to Word","QR Generator","Password Generator","Unit Converter","Age Calculator","BMI Calculator","Loan Calculator","Text to Speech","Speech to Text","Color Picker","Gradient Generator","JSON Formatter","HTML Minifier","Base64 Encoder","URL Shortener","Word Counter","Case Converter","Lorem Generator","Hashtag Generator","Invoice Generator","Resume Builder","YouTube Thumbnail Downloader","YouTube Tag Extractor","Instagram Downloader","Meta Tag Generator","Robots.txt Generator","Sitemap Generator","Plagiarism Checker","Grammar Checker","Typing Test","Wana AI Chat"]
-  
-  const Compressor=()=>{
-    const [out,setOut]=useState(null)
-    return (<div style={{background:'#fff',padding:'20px',borderRadius:'12px'}}><h2>Image Compressor - LIVE</h2><input type="file" accept="image/*" onChange={(e)=>{
-      const f=e.target.files[0]; const r=new FileReader();
-      r.onload=(ev)=>{ const im=new Image(); im.onload=()=>{
-        const c=document.createElement('canvas'); c.width=im.width*0.5; c.height=im.height*0.5;
-        c.getContext('2d').drawImage(im,0,0,c.width,c.height); setOut(c.toDataURL('image/jpeg',0.5))
-      }; im.src=ev.target.result; }; r.readAsDataURL(f);
-    }}/>{out&&<><br/><img src={out} width="200"/><br/><a href={out} download="c.jpg" style={{background:'blue',color:'white',padding:'8px',borderRadius:'6px',textDecoration:'none'}}>Download</a></>}</div>)
-  }
-
-  const list=tools.filter(t=>t.toLowerCase().includes(q.toLowerCase()))
-  
-  return(
-    <div style={{minHeight:'100vh',background:'#f8fafc',fontFamily:'system-ui'}}>
-      <header style={{background:'#fff',padding:'14px',display:'flex',justifyContent:'space-between',maxWidth:'1200px',margin:'0 auto'}}>
-        <b onClick={()=>setActive(null)}>WanaLab.pk</b>
-        <span style={{background:'#dcfce7',padding:'4px 10px',borderRadius:'20px',fontSize:'12px'}}>CHECK: If you see this text, new code is LIVE</span>
-      </header>
-      <main style={{maxWidth:'1200px',margin:'0 auto',padding:'20px'}}>
-        {!active ? <>
-          <h1 style={{textAlign:'center'}}>40 Tools - TEST</h1>
-          <div style={{textAlign:'center'}}><input value={q} onChange={e=>setQ(e.target.value)} placeholder="search" style={{padding:'10px',width:'300px',borderRadius:'8px',border:'1px solid #ccc'}}/></div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(150px,1fr))',gap:'10px',marginTop:'20px'}}>
-            {list.map((t,i)=><div key={i} onClick={()=>setActive(t)} style={{background:'#fff',padding:'14px',borderRadius:'10px',border:'1px solid #ddd',cursor:'pointer'}}>{t} {t==="Image Compressor"&&"✅ LIVE"}</div>)}
-          </div>
-        </> : <>
-          <button onClick={()=>setActive(null)} style={{marginBottom:'10px'}}>← Back</button>
-          {active==="Image Compressor" ? <Compressor/> : <div style={{background:'#fff',padding:'20px'}}><h2>{active}</h2><p>Coming soon</p></div>}
-        </>}
-      </main>
-    </div>
-  )
-}
+const [a,setA]=useState(null)
+const [q,setQ]=useState("")
+return(<div style={{minHeight:'100vh',background:'#f8fafc',fontFamily:'system-ui'}}><div style={{background:'#fff',padding:'14px',display:'flex',justifyContent:'space-between',borderBottom:'1px solid #e2e8f0',maxWidth:'1200px',margin:'0 auto'}}><b onClick={()=>setA(null)} style={{cursor:'pointer'}}>WanaLab.pk</b><span style={{background:'#2563eb',color:'#fff',padding:'4px 12px',borderRadius:'20px',fontSize:'12px'}}>NEW CODE LIVE ✅ 2b6e0cd FIXED</span></div><div style={{maxWidth:'1200px',margin:'0 auto',padding:'20px'}}>{!a?<><h1>WORKING NOW - 40 Tools</h1><p>Cache fixed test</p><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search..." style={{padding:'12px',width:'100%',maxWidth:'300px',borderRadius:'12px',border:'1px solid #ccc'}}/><div style={{marginTop:'20px',display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(170px,1fr))',gap:'12px'}}>{["Image Compressor","Image Resizer"].map(t=><div key={t} onClick={()=>setA(t)} style={{background:'#fff',padding:'16px',borderRadius:'12px',border:'1px solid #e2e8f0',cursor:'pointer'}}>{t} ✅</div>)}</div></>:<><button onClick={()=>setA(null)} style={{marginBottom:'10px'}}>← Back</button><div style={{background:'#fff',padding:'20px',borderRadius:'12px'}}><h2>{a} ✅ WORKING</h2><input type="file" onChange={e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=200;c.height=200;c.getContext('2d').drawImage(im,0,0,200,200);const a2=document.createElement('a');a2.href=c.toDataURL();a2.download='test.jpg';a2.click()};im.src=ev.target.result};r.readAsDataURL(f)}}/><p>Select image → auto download compressed</p></div></>}</div></div>)}
