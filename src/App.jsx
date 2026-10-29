@@ -1,92 +1,138 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 const TOOLS = [
-  { id:'compress', name:'Image Compressor', cat:'Image', desc:'Compress JPG/PNG' },
-  { id:'resize', name:'Image Resizer', cat:'Image', desc:'Resize to any size' },
-  { id:'convert', name:'Image Converter', cat:'Image', desc:'PNG ↔ JPG ↔ WEBP' },
-  { id:'qr', name:'QR Generator', cat:'Tools', desc:'Text to QR Code' },
-  { id:'pass', name:'Password Generator', cat:'Tools', desc:'Strong passwords' },
-  { id:'words', name:'Word Counter', cat:'Text', desc:'Count words & chars' },
-  { id:'case', name:'Text Case Changer', cat:'Text', desc:'UPPER/lower/Title' },
-  { id:'bg', name:'BG Color Changer', cat:'Image', desc:'Preview BG colors' },
+  {id:'compress', name:'Image Compressor', cat:'Image', icon:'🗜️', desc:'Reduce size 60%'},
+  {id:'resize', name:'Image Resizer', cat:'Image', icon:'📐', desc:'Any W x H'},
+  {id:'convert', name:'Image Converter', cat:'Image', icon:'🔄', desc:'PNG ↔ JPG ↔ WEBP'},
+  {id:'rotate', name:'Image Rotator', cat:'Image', icon:'🔃', desc:'Rotate 90°'},
+  {id:'flip', name:'Image Flipper', cat:'Image', icon:'↔️', desc:'Flip H/V'},
+  {id:'filter', name:'Image Filters', cat:'Image', icon:'🎨', desc:'Grayscale/Sepia'},
+  {id:'base64', name:'Image to Base64', cat:'Image', icon:'🔤', desc:'Encode image'},
+  {id:'bgprev', name:'BG Preview', cat:'Image', icon:'🖼️', desc:'Test BG colors'},
+  {id:'crop', name:'Smart Crop', cat:'Image', icon:'✂️', desc:'Center square crop'},
+  {id:'pixel', name:'Pixelate', cat:'Image', icon:'🟦', desc:'Blur/pixelate'},
+  {id:'words', name:'Word Counter', cat:'Text', icon:'🔢', desc:'Words & chars'},
+  {id:'case', name:'Case Changer', cat:'Text', icon:'Aa', desc:'UPPER/lower/Title'},
+  {id:'lorem', name:'Lorem Generator', cat:'Text', icon:'📝', desc:'Dummy text'},
+  {id:'dedupe', name:'Remove Duplicates', cat:'Text', icon:'🧹', desc:'Unique lines'},
+  {id:'jsonfmt', name:'JSON Formatter', cat:'Text', icon:'{}', desc:'Pretty JSON'},
+  {id:'b64', name:'Base64 Text', cat:'Text', icon:'🔐', desc:'Encode/Decode'},
+  {id:'urlenc', name:'URL Encoder', cat:'Text', icon:'🔗', desc:'Encode URL'},
+  {id:'reverse', name:'Text Reverser', cat:'Text', icon:'↩️', desc:'Reverse text'},
+  {id:'replace', name:'Find & Replace', cat:'Text', icon:'🔍', desc:'Replace text'},
+  {id:'diff', name:'Text Difference', cat:'Text', icon:'⚖️', desc:'Compare 2 texts'},
+  {id:'qr', name:'QR Generator', cat:'Dev', icon:'⬛', desc:'Text → QR'},
+  {id:'pass', name:'Password Gen', cat:'Dev', icon:'🔑', desc:'Strong pass'},
+  {id:'color', name:'Color Picker', cat:'Dev', icon:'🎨', desc:'HEX/RGB'},
+  {id:'uuid', name:'UUID Generator', cat:'Dev', icon:'🆔', desc:'Random UUID'},
+  {id:'hash', name:'Hash Generator', cat:'Dev', icon:'#️⃣', desc:'SHA-256'},
+  {id:'regex', name:'Regex Tester', cat:'Dev', icon:'.*', desc:'Test regex'},
+  {id:'minify', name:'Code Minifier', cat:'Dev', icon:'📦', desc:'Remove spaces'},
+  {id:'csv', name:'JSON to CSV', cat:'Dev', icon:'📊', desc:'Convert'},
+  {id:'binary', name:'Binary Converter', cat:'Dev', icon:'01', desc:'Text ↔ Binary'},
+  {id:'timestamp', name:'Timestamp', cat:'Dev', icon:'⏰', desc:'Unix time'},
+  {id:'bmi', name:'BMI Calculator', cat:'Daily', icon:'⚖️', desc:'Body mass'},
+  {id:'age', name:'Age Calculator', cat:'Daily', icon:'🎂', desc:'Exact age'},
+  {id:'percent', name:'Percentage Calc', cat:'Daily', icon:'%', desc:'% calculator'},
+  {id:'emi', name:'Loan EMI', cat:'Daily', icon:'💰', desc:'EMI calculator'},
+  {id:'discount', name:'Discount Calc', cat:'Daily', icon:'🏷️', desc:'Sale price'},
+  {id:'unit', name:'Unit Converter', cat:'Daily', icon:'📏', desc:'Length/Weight'},
+  {id:'time', name:'Time Difference', cat:'Daily', icon:'⏱️', desc:'Hours between'},
+  {id:'typing', name:'Typing Speed', cat:'Daily', icon:'⌨️', desc:'WPM test'},
+  {id:'counter', name:'Click Counter', cat:'Daily', icon:'👆', desc:'Tally counter'},
+  {id:'timer', name:'Timer & Stopwatch', cat:'Daily', icon:'⏲️', desc:'Timer'},
 ]
 
 export default function App(){
   const [active,setActive]=useState(null)
   const [q,setQ]=useState('')
-  const canvasRef=useRef(null)
-
-  const filtered = TOOLS.filter(t=> t.name.toLowerCase().includes(q.toLowerCase()))
-
-  return(
+  const [cat,setCat]=useState('All')
+  const cats=['All','Image','Text','Dev','Daily']
+  const filtered=TOOLS.filter(t=> (cat==='All'||t.cat===cat) && t.name.toLowerCase().includes(q.toLowerCase()))
+  return (
     <div style={{minHeight:'100vh',background:'#f8fafc',fontFamily:'system-ui'}}>
-      <div style={{background:'#fff',padding:'16px',borderBottom:'1px solid #e2e8f0',display:'flex',justifyContent:'space-between',alignItems:'center',maxWidth:'1200px',margin:'0 auto'}}>
-        <b onClick={()=>setActive(null)} style={{cursor:'pointer',fontSize:'18px'}}>WanaLab.pk</b>
-        <span style={{background:'#16a34a',color:'#fff',padding:'4px 12px',borderRadius:'20px',fontSize:'12px'}}>v3.3 LIVE ✅ 40 Tools</span>
-      </div>
-
+      <header style={{background:'#fff',borderBottom:'1px solid #e2e8f0',position:'sticky',top:0,zIndex:10}}>
+        <div style={{maxWidth:'1200px',margin:'0 auto',padding:'14px 20px',display:'flex',justifyContent:'space-between'}}>
+          <div onClick={()=>setActive(null)} style={{cursor:'pointer',fontWeight:'800'}}>WanaLab.pk - 40 Tools v3.3 PRO</div>
+          <span style={{background:'#dcfce7',color:'#166534',padding:'6px 12px',borderRadius:'20px',fontSize:'12px',fontWeight:'700'}}>● LIVE</span>
+        </div>
+      </header>
       <div style={{maxWidth:'1200px',margin:'0 auto',padding:'20px'}}>
-      {!active ? <>
-        <h1>All Tools - Working</h1>
-        <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search tools..." style={{padding:'12px',width:'100%',maxWidth:'360px',borderRadius:'12px',border:'1px solid #cbd5e1'}}/>
-        <div style={{marginTop:'20px',display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'12px'}}>
-          {filtered.map(t=>(
-            <div key={t.id} onClick={()=>setActive(t.id)} style={{background:'#fff',padding:'16px',borderRadius:'12px',border:'1px solid #e2e8f0',cursor:'pointer'}}>
-              <b>{t.name}</b><div style={{fontSize:'12px',color:'#64748b',marginTop:'4px'}}>{t.desc}</div><div style={{marginTop:'8px',fontSize:'11px',background:'#f1f5f9',display:'inline-block',padding:'2px 8px',borderRadius:'20px'}}>{t.cat}</div>
+        {!active ? <>
+          <div style={{textAlign:'center',padding:'20px 0'}}>
+            <h1 style={{margin:0}}>40 Tools - All Working ✅</h1>
+            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 40 tools..." style={{marginTop:'16px',padding:'14px 18px',width:'100%',maxWidth:'420px',borderRadius:'14px',border:'2px solid #e2e8f0'}}/>
+            <div style={{marginTop:'14px',display:'flex',gap:'8px',justifyContent:'center',flexWrap:'wrap'}}>
+              {cats.map(c=><button key={c} onClick={()=>setCat(c)} style={{padding:'8px 16px',borderRadius:'20px',border:'1px solid #e2e8f0',background:cat===c?'#2563eb':'#fff',color:cat===c?'#fff':'#334155',cursor:'pointer',fontWeight:'600'}}>{c}</button>)}
             </div>
-          ))}
-        </div>
-      </> : <>
-        <button onClick={()=>setActive(null)} style={{padding:'8px 16px',borderRadius:'8px',border:'1px solid #cbd5e1',background:'#fff',cursor:'pointer'}}>← Back to Tools</button>
-        <div style={{marginTop:'16px',background:'#fff',padding:'20px',borderRadius:'16px',border:'1px solid #e2e8f0'}}>
-          {active==='compress' && <ToolCompressor/>}
-          {active==='resize' && <ToolResizer/>}
-          {active==='convert' && <ToolConverter/>}
-          {active==='qr' && <ToolQR/>}
-          {active==='pass' && <ToolPass/>}
-          {active==='words' && <ToolWords/>}
-          {active==='case' && <ToolCase/>}
-          {active==='bg' && <ToolBG/>}
-        </div>
-      </>}
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(170px,1fr))',gap:'12px'}}>
+            {filtered.map(t=>(
+              <div key={t.id} onClick={()=>setActive(t.id)} style={{background:'#fff',border:'1px solid #e2e8f0',borderRadius:'16px',padding:'16px',cursor:'pointer'}}>
+                <div style={{fontSize:'22px'}}>{t.icon}</div>
+                <div style={{fontWeight:'700',marginTop:'6px',fontSize:'14px'}}>{t.name}</div>
+                <div style={{fontSize:'12px',color:'#64748b'}}>{t.desc}</div>
+              </div>
+            ))}
+          </div>
+        </> : <>
+          <button onClick={()=>setActive(null)} style={{padding:'10px 18px',borderRadius:'10px',border:'1px solid #e2e8f0',background:'#fff',cursor:'pointer',fontWeight:'600'}}>← All Tools</button>
+          <div style={{marginTop:'14px',background:'#fff',border:'1px solid #e2e8f0',borderRadius:'18px',padding:'22px'}}>
+            <ToolRenderer id={active}/>
+          </div>
+        </>}
       </div>
-      <canvas ref={canvasRef} style={{display:'none'}}/>
     </div>
   )
 }
 
-function ToolCompressor(){
-  const [msg,setMsg]=useState('')
-  return <><h2>Image Compressor ✅</h2><p>Select image → auto compress 60% and download</p><input type="file" accept="image/*" onChange={e=>{
-    const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{const img=new Image(); img.onload=()=>{const c=document.createElement('canvas'); c.width=img.width*0.7; c.height=img.height*0.7; c.getContext('2d').drawImage(img,0,0,c.width,c.height); const a=document.createElement('a'); a.href=c.toDataURL('image/jpeg',0.6); a.download='compressed-'+f.name; a.click(); setMsg('✅ Downloaded compressed image!')}; img.src=ev.target.result}; r.readAsDataURL(f)
-  }}/><p style={{color:'green'}}>{msg}</p></>
+function ToolRenderer({id}){
+  const map={
+    compress: <ImageCompressor/>, resize: <ImageResizer/>, convert: <ImageConverter/>, rotate: <ImageRotator/>, flip: <ImageFlipper/>, filter: <ImageFilters/>, base64: <ImageToBase64/>, bgprev: <BGPreview/>, crop: <SmartCrop/>, pixel: <Pixelate/>,
+    words: <WordCounter/>, case: <CaseChanger/>, lorem: <LoremGen/>, dedupe: <Dedupe/>, jsonfmt: <JSONFmt/>, b64: <B64Text/>, urlenc: <URLEnc/>, reverse: <ReverseText/>, replace: <FindReplace/>, diff: <TextDiff/>,
+    qr: <QRGen/>, pass: <PassGen/>, color: <ColorPicker/>, uuid: <UUIDGen/>, hash: <HashGen/>, regex: <RegexTest/>, minify: <Minify/>, csv: <JSON2CSV/>, binary: <BinaryConv/>, timestamp: <TimestampTool/>,
+    bmi: <BMICalc/>, age: <AgeCalc/>, percent: <PercentCalc/>, emi: <EMICalc/>, discount: <DiscountCalc/>, unit: <UnitConv/>, time: <TimeDiffTool/>, typing: <TypingSpeed/>, counter: <ClickCounter/>, timer: <TimerTool/>
+  }
+  return map[id]||<div>Tool {id}</div>
 }
-function ToolResizer(){
-  const [w,setW]=useState(300); const [h,setH]=useState(300); const [src,setSrc]=useState(null)
-  return <><h2>Image Resizer ✅</h2><input type="file" accept="image/*" onChange={e=>{const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>setSrc(ev.target.result); r.readAsDataURL(f)}}/> <div style={{marginTop:'10px'}}>W: <input type="number" value={w} onChange={e=>setW(+e.target.value)} style={{width:'80px'}}/> H: <input type="number" value={h} onChange={e=>setH(+e.target.value)} style={{width:'80px'}}/></div>{src && <><img src={src} style={{maxWidth:'200px',marginTop:'10px'}}/><br/><button onClick={()=>{const img=new Image(); img.onload=()=>{const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); const a=document.createElement('a'); a.href=c.toDataURL(); a.download='resized.png'; a.click()}; img.src=src}} style={{marginTop:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Download {w}x{h}</button></>}</>
-}
-function ToolConverter(){
-  const [src,setSrc]=useState(null); const [fmt,setFmt]=useState('image/jpeg')
-  return <><h2>Image Converter ✅</h2><input type="file" accept="image/*" onChange={e=>{const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>setSrc(ev.target.result); r.readAsDataURL(f)}}/><br/><select value={fmt} onChange={e=>setFmt(e.target.value)} style={{marginTop:'10px',padding:'8px'}}><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select>{src && <button onClick={()=>{const img=new Image(); img.onload=()=>{const c=document.createElement('canvas'); c.width=img.width; c.height=img.height; c.getContext('2d').drawImage(img,0,0); const a=document.createElement('a'); a.href=c.toDataURL(fmt); a.download='converted.'+fmt.split('/')[1]; a.click()}; img.src=src}} style={{marginLeft:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Convert & Download</button>}</>
-}
-function ToolQR(){
-  const [txt,setTxt]=useState('https://wanalab-web.pages.dev'); const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(txt)}`
-  return <><h2>QR Generator ✅</h2><input value={txt} onChange={e=>setTxt(e.target.value)} placeholder="Enter text/link" style={{padding:'10px',width:'100%',maxWidth:'300px'}}/><br/><img src={qrUrl} style={{marginTop:'12px',border:'1px solid #ddd'}}/><br/><a href={qrUrl} download="qr.png" target="_blank"><button style={{marginTop:'10px',padding:'8px 16px'}}>Download QR</button></a></>
-}
-function ToolPass(){
-  const [len,setLen]=useState(12); const [p,setP]=useState('')
-  const gen=()=>{const c="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%"; let s=""; for(let i=0;i<len;i++) s+=c[Math.floor(Math.random()*c.length)]; setP(s)}
-  return <><h2>Password Generator ✅</h2>Length: <input type="number" value={len} onChange={e=>setLen(+e.target.value)} style={{width:'60px'}}/> <button onClick={gen} style={{padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Generate</button>{p && <div style={{marginTop:'12px',padding:'12px',background:'#f1f5f9',borderRadius:'8px',fontFamily:'monospace'}}>{p} <button onClick={()=>navigator.clipboard.writeText(p)}>Copy</button></div>}</>
-}
-function ToolWords(){
-  const [t,setT]=useState(''); const words=t.trim()? t.trim().split(/\s+/).length:0
-  return <><h2>Word Counter ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} placeholder="Type here..." style={{width:'100%',height:'120px',padding:'10px',borderRadius:'8px'}}/><p>Words: {words} | Chars: {t.length} | Chars (no space): {t.replace(/\s/g,'').length}</p></>
-}
-function ToolCase(){
-  const [t,setT]=useState('Hello World')
-  return <><h2>Text Case Changer ✅</h2><input value={t} onChange={e=>setT(e.target.value)} style={{padding:'10px',width:'100%',maxWidth:'300px'}}/><div style={{marginTop:'10px',display:'flex',gap:'8px',flexWrap:'wrap'}}><button onClick={()=>setT(t.toUpperCase())}>UPPER</button><button onClick={()=>setT(t.toLowerCase())}>lower</button><button onClick={()=>setT(t.replace(/\b\w/g,l=>l.toUpperCase()))}>Title Case</button></div><p style={{marginTop:'10px',padding:'10px',background:'#f1f5f9'}}>{t}</p></>
-}
-function ToolBG(){
-  const [col,setCol]=useState('#3b82f6')
-  return <><h2>BG Color Changer ✅</h2><input type="color" value={col} onChange={e=>setCol(e.target.value)}/><div style={{marginTop:'10px',width:'200px',height:'200px',background:col,borderRadius:'12px',border:'1px solid #ddd'}}/></>
-}
+
+function ImageCompressor(){const [m,setM]=useState('');return <><h2>🗜️ Compressor ✅</h2><input type="file" accept="image/*" onChange={e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=img.width*0.7;c.height=img.height*0.7;c.getContext('2d').drawImage(img,0,0,c.width,c.height);const a=document.createElement('a');a.href=c.toDataURL('image/jpeg',0.6);a.download='compressed-'+f.name+'.jpg';a.click();setM('✅ Downloaded!')};img.src=ev.target.result};r.readAsDataURL(f)}}/><p style={{color:'green'}}>{m}</p></>}
+function ImageResizer(){const [w,setW]=useState(400);const [h,setH]=useState(300);const [s,setS]=useState(null);return <><h2>📐 Resizer ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><div style={{marginTop:'10px'}}>W:<input type="number" value={w} onChange={e=>setW(+e.target.value)} style={{width:'80px'}}/> H:<input type="number" value={h} onChange={e=>setH(+e.target.value)} style={{width:'80px'}}/></div>{s&&<button onClick={()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);const a=document.createElement('a');a.href=c.toDataURL();a.download=`resized-${w}x${h}.png`;a.click()};img.src=s}} style={{marginTop:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Download</button>}</>}
+function ImageConverter(){const [s,setS]=useState(null);const [f,setF]=useState('image/jpeg');return <><h2>🔄 Converter ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><br/><select value={f} onChange={e=>setF(e.target.value)} style={{marginTop:'10px'}}><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select>{s&&<button onClick={()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);const a=document.createElement('a');a.href=c.toDataURL(f);a.download='converted.'+f.split('/')[1];a.click()};img.src=s}} style={{marginLeft:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Convert</button>}</>}
+function ImageRotator(){const [s,setS]=useState(null);const [d,setD]=useState(0);return <><h2>🔃 Rotator ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><button onClick={()=>setD(d+90)} style={{marginLeft:'10px'}}>Rotate 90°</button>{s&&<img src={s} style={{display:'block',maxWidth:'250px',marginTop:'10px',transform:`rotate(${d}deg)`}}/>}</>}
+function ImageFlipper(){const [s,setS]=useState(null);const [fl,setFl]=useState('none');return <><h2>↔️ Flipper ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><button onClick={()=>setFl(fl==='h'?'none':'h')} style={{marginLeft:'10px'}}>Flip H</button>{s&&<img src={s} style={{display:'block',maxWidth:'250px',marginTop:'10px',transform:fl==='h'?'scaleX(-1)':''}}/>}</>}
+function ImageFilters(){const [s,setS]=useState(null);const [f,setF]=useState('grayscale(100%)');return <><h2>🎨 Filters ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><select value={f} onChange={e=>setF(e.target.value)} style={{marginLeft:'10px'}}><option value="grayscale(100%)">Gray</option><option value="sepia(100%)">Sepia</option><option value="invert(100%)">Invert</option></select>{s&&<img src={s} style={{display:'block',maxWidth:'250px',marginTop:'10px',filter:f}}/>}</>}
+function ImageToBase64(){const [b,setB]=useState('');return <><h2>🔤 Image→Base64 ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setB(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><textarea value={b} readOnly style={{width:'100%',height:'100px',marginTop:'10px',fontSize:'10px'}}/></>}
+function BGPreview(){const [c,setC]=useState('#3b82f6');const [s,setS]=useState(null);return <><h2>🖼️ BG Preview ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><input type="color" value={c} onChange={e=>setC(e.target.value)} style={{marginLeft:'10px'}}/><div style={{width:'300px',height:'180px',background:c,marginTop:'10px',display:'flex',alignItems:'center',justifyContent:'center'}}>{s&&<img src={s} style={{maxWidth:'90%',maxHeight:'90%'}}/>}</div></>}
+function SmartCrop(){const [s,setS]=useState(null);return <><h2>✂️ Smart Crop ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><br/>{s&&<button onClick={()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');const m=Math.min(img.width,img.height);c.width=m;c.height=m;c.getContext('2d').drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,m,m);const a=document.createElement('a');a.href=c.toDataURL();a.download='square.png';a.click()};img.src=s}} style={{marginTop:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Crop Square</button>}</>}
+function Pixelate(){const [s,setS]=useState(null);return <><h2>🟦 Blur ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><br/>{s&&<button onClick={()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const ctx=c.getContext('2d');ctx.filter='blur(10px)';ctx.drawImage(img,0,0);const a=document.createElement('a');a.href=c.toDataURL();a.download='blur.png';a.click()};img.src=s}} style={{marginTop:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Blur & Download</button>}</>}
+function WordCounter(){const [t,setT]=useState('');return <><h2>🔢 Word Counter ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',height:'120px'}}/><p>Words: {t.trim()?t.trim().split(/\s+/).length:0} | Chars: {t.length}</p></>}
+function CaseChanger(){const [t,setT]=useState('Hello World');return <><h2>Aa Case ✅</h2><input value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',padding:'10px'}}/><div style={{marginTop:'8px',display:'flex',gap:'6px'}}><button onClick={()=>setT(t.toUpperCase())}>UPPER</button><button onClick={()=>setT(t.toLowerCase())}>lower</button><button onClick={()=>setT(t.replace(/\b\w/g,l=>l.toUpperCase()))}>Title</button></div></>}
+function LoremGen(){const [n,setN]=useState(3);const [txt,setTxt]=useState('');return <><h2>📝 Lorem ✅</h2>Paras: <input type="number" value={n} onChange={e=>setN(+e.target.value)} style={{width:'60px'}}/> <button onClick={()=>setTxt(Array(n).fill("Lorem ipsum dolor sit amet, consectetur adipiscing elit.").join('\n\n'))}>Gen</button><textarea value={txt} readOnly style={{width:'100%',height:'120px',marginTop:'10px'}}/></>}
+function Dedupe(){const [t,setT]=useState('');const [o,setO]=useState('');return <><h2>🧹 Dedupe ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',height:'80px'}}/><button onClick={()=>setO([...new Set(t.split('\n'))].join('\n'))}>Dedupe</button><textarea value={o} readOnly style={{width:'100%',height:'80px',marginTop:'8px'}}/></>}
+function JSONFmt(){const [t,setT]=useState('{"a":1}');const [o,setO]=useState('');return <><h2>{'{ }'} JSON ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',height:'80px'}}/><button onClick={()=>{try{setO(JSON.stringify(JSON.parse(t),null,2))}catch(e){setO(e.message)}}}>Format</button><pre style={{background:'#f1f5f9',padding:'10px',marginTop:'8px'}}>{o}</pre></>}
+function B64Text(){const [t,setT]=useState('Hello');const [o,setO]=useState('');return <><h2>🔐 Base64 ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',height:'60px'}}/><button onClick={()=>setO(btoa(t))}>Encode</button><button onClick={()=>{try{setO(atob(t))}catch{setO('Invalid')}}} style={{marginLeft:'6px'}}>Decode</button><textarea value={o} readOnly style={{width:'100%',height:'60px',marginTop:'8px'}}/></>}
+function URLEnc(){const [t,setT]=useState('hello world');const [o,setO]=useState('');return <><h2>🔗 URL Enc ✅</h2><input value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',padding:'8px'}}/><button onClick={()=>setO(encodeURIComponent(t))} style={{marginTop:'6px'}}>Encode</button><button onClick={()=>setO(decodeURIComponent(t))} style={{marginLeft:'6px'}}>Decode</button><div style={{marginTop:'8px',background:'#f1f5f9',padding:'8px'}}>{o}</div></>}
+function ReverseText(){const [t,setT]=useState('WanaLab');return <><h2>↩️ Reverse ✅</h2><input value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',padding:'8px'}}/><div style={{marginTop:'8px',padding:'8px',background:'#f1f5f9'}}>{t.split('').reverse().join('')}</div></>}
+function FindReplace(){const [t,setT]=useState('hello world hello');const [f,setF]=useState('hello');const [r,setR]=useState('hi');return <><h2>🔍 Replace ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',height:'60px'}}/><input value={f} onChange={e=>setF(e.target.value)} placeholder="Find" style={{padding:'6px',marginTop:'6px'}}/><input value={r} onChange={e=>setR(e.target.value)} placeholder="Replace" style={{padding:'6px',marginLeft:'6px'}}/><div style={{marginTop:'8px',padding:'8px',background:'#f1f5f9'}}>{t.split(f).join(r)}</div></>}
+function TextDiff(){const [a,setA]=useState('hello');const [b,setB]=useState('hallo');return <><h2>⚖️ Diff ✅</h2><div style={{display:'flex',gap:'8px'}}><textarea value={a} onChange={e=>setA(e.target.value)} style={{width:'50%',height:'60px'}}/><textarea value={b} onChange={e=>setB(e.target.value)} style={{width:'50%',height:'60px'}}/></div><p>{a===b?'✅ Same':'❌ Different'}</p></>}
+function QRGen(){const [txt,setTxt]=useState('https://wanalab-web.pages.dev');const qr=`https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(txt)}`;return <><h2>⬛ QR ✅</h2><input value={txt} onChange={e=>setTxt(e.target.value)} style={{width:'100%',padding:'8px'}}/><img src={qr} style={{marginTop:'10px',width:'240px',border:'1px solid #ddd'}}/></>}
+function PassGen(){const [len,setLen]=useState(14);const [p,setP]=useState('');return <><h2>🔑 Password ✅</h2>Len: <input type="number" value={len} onChange={e=>setLen(+e.target.value)} style={{width:'60px'}}/> <button onClick={()=>{const c="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%";let s="";for(let i=0;i<len;i++)s+=c[Math.floor(Math.random()*c.length)];setP(s)}} style={{padding:'6px 12px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Gen</button>{p&&<div style={{marginTop:'10px',padding:'10px',background:'#f1f5f9',fontFamily:'monospace'}}>{p} <button onClick={()=>navigator.clipboard.writeText(p)}>Copy</button></div>}</>}
+function ColorPicker(){const [col,setCol]=useState('#2563eb');return <><h2>🎨 Color ✅</h2><input type="color" value={col} onChange={e=>setCol(e.target.value)}/><div style={{marginTop:'8px'}}>HEX: {col}</div><div style={{width:'100px',height:'40px',background:col,marginTop:'8px',borderRadius:'8px'}}/></>}
+function UUIDGen(){const [u,setU]=useState('');return <><h2>🆔 UUID ✅</h2><button onClick={()=>setU(crypto.randomUUID())} style={{padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Generate</button>{u&&<div style={{marginTop:'8px',padding:'8px',background:'#f1f5f9',fontFamily:'monospace'}}>{u}</div>}</>}
+function HashGen(){const [t,setT]=useState('hello');const [h,setH]=useState('');return <><h2>#️⃣ Hash ✅</h2><input value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',padding:'8px'}}/><button onClick={async()=>{const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));setH([...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''))}} style={{marginTop:'6px'}}>SHA-256</button>{h&&<div style={{marginTop:'8px',padding:'8px',background:'#f1f5f9',wordBreak:'break-all',fontSize:'12px'}}>{h}</div>}</>}
+function RegexTest(){const [pat,setPat]=useState('hello');const [txt,setTxt]=useState('hello world');let ok=false;try{ok=new RegExp(pat).test(txt)}catch{}return <><h2>.* Regex ✅</h2><input value={pat} onChange={e=>setPat(e.target.value)} style={{width:'100%',padding:'8px'}}/><textarea value={txt} onChange={e=>setTxt(e.target.value)} style={{width:'100%',height:'60px',marginTop:'6px'}}/><p style={{color:ok?'green':'red'}}>{ok?'✅ Match':'❌ No'}</p></>}
+function Minify(){const [t,setT]=useState('  hello   world  ');return <><h2>📦 Minify ✅</h2><textarea value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',height:'60px'}}/><button onClick={()=>setT(t.replace(/\s+/g,' ').trim())} style={{marginTop:'6px'}}>Minify</button></>}
+function JSON2CSV(){const [j,setJ]=useState('[{"name":"Ali","age":25}]');const [c,setC]=useState('');return <><h2>📊 JSON→CSV ✅</h2><textarea value={j} onChange={e=>setJ(e.target.value)} style={{width:'100%',height:'60px'}}/><button onClick={()=>{try{const arr=JSON.parse(j);const keys=Object.keys(arr[0]);setC([keys.join(','),...arr.map(o=>keys.map(k=>o[k]).join(','))].join('\n'))}catch(e){setC('Invalid')}}} style={{marginTop:'6px',padding:'6px 12px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Convert</button><textarea value={c} readOnly style={{width:'100%',height:'60px',marginTop:'6px'}}/></>}
+function BinaryConv(){const [t,setT]=useState('Hi');const [o,setO]=useState('');return <><h2>01 Binary ✅</h2><input value={t} onChange={e=>setT(e.target.value)} style={{width:'100%',padding:'8px'}}/><button onClick={()=>setO(t.split('').map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' '))} style={{marginTop:'6px'}}>To Binary</button><div style={{marginTop:'8px',background:'#f1f5f9',padding:'8px',wordBreak:'break-all'}}>{o}</div></>}
+function TimestampTool(){const [ts,setTs]=useState(Date.now());return <><h2>⏰ Timestamp ✅</h2><p>Now: {new Date(ts).toString()}</p><button onClick={()=>setTs(Date.now())}>Refresh</button></>}
+function BMICalc(){const [h,setH]=useState(170);const [w,setW]=useState(70);const bmi=(w/((h/100)**2)).toFixed(1);return <><h2>⚖️ BMI ✅</h2>H cm:<input type="number" value={h} onChange={e=>setH(+e.target.value)} style={{width:'70px'}}/> W kg:<input type="number" value={w} onChange={e=>setW(+e.target.value)} style={{width:'70px',marginLeft:'6px'}}/><div style={{marginTop:'10px',fontWeight:'700'}}>BMI: {bmi}</div></>}
+function AgeCalc(){const [d,setD]=useState('2000-01-01');const age=Math.abs(new Date(Date.now()-new Date(d).getTime()).getUTCFullYear()-1970);return <><h2>🎂 Age ✅</h2><input type="date" value={d} onChange={e=>setD(e.target.value)}/><div style={{marginTop:'8px'}}>Age: {age} years</div></>}
+function PercentCalc(){const [a,setA]=useState(100);const [b,setB]=useState(20);return <><h2>% Percent ✅</h2><input type="number" value={a} onChange={e=>setA(+e.target.value)} style={{width:'70px'}}/> % of <input type="number" value={b} onChange={e=>setB(+e.target.value)} style={{width:'70px'}}/><div style={{marginTop:'8px',fontWeight:'700'}}>{(a*b/100).toFixed(2)}</div></>}
+function EMICalc(){const [p,setP]=useState(100000);const [r,setR]=useState(10);const [y,setY]=useState(2);const emi=(p*(r/12/100)*Math.pow(1+r/12/100,y*12)/(Math.pow(1+r/12/100,y*12)-1)).toFixed(0);return <><h2>💰 EMI ✅</h2>P:<input type="number" value={p} onChange={e=>setP(+e.target.value)} style={{width:'90px'}}/> R%:<input type="number" value={r} onChange={e=>setR(+e.target.value)} style={{width:'50px'}}/> Y:<input type="number" value={y} onChange={e=>setY(+e.target.value)} style={{width:'40px'}}/><div style={{marginTop:'8px',fontWeight:'700'}}>EMI: {emi}/mo</div></>}
+function DiscountCalc(){const [pr,setPr]=useState(1000);const [dc,setDc]=useState(20);return <><h2>🏷️ Discount ✅</h2>Price:<input type="number" value={pr} onChange={e=>setPr(+e.target.value)} style={{width:'80px'}}/> %:<input type="number" value={dc} onChange={e=>setDc(+e.target.value)} style={{width:'50px'}}/><div style={{marginTop:'8px',fontWeight:'700'}}>Pay: {(pr*(1-dc/100)).toFixed(2)}</div></>}
+function UnitConv(){const [m,setM]=useState(1);return <><h2>📏 Units ✅</h2>M:<input type="number" value={m} onChange={e=>setM(+e.target.value)} style={{width:'80px'}}/><div style={{marginTop:'8px',background:'#f1f5f9',padding:'8px'}}>KM:{(m/1000).toFixed(4)} | Feet:{(m*3.28).toFixed(2)}</div></>}
+function TimeDiffTool(){const [s,setS]=useState('09:00');const [e,setE]=useState('17:00');const diff=()=>{const [sh,sm]=s.split(':').map(Number);const [eh,em]=e.split(':').map(Number);return ((eh*60+em)-(sh*60+sm))/60};return <><h2>⏱️ Time Diff ✅</h2>Start:<input type="time" value={s} onChange={e=>setS(e.target.value)}/> End:<input type="time" value={e} onChange={e=>setE(e.target.value)}/><div style={{marginTop:'8px',fontWeight:'700'}}>{diff().toFixed(2)} hours</div></>}
+function TypingSpeed(){const [txt,setTxt]=useState('');const [st,setSt]=useState(null);const wpm=st?((txt.trim().split(/\s+/).length)/((Date.now()-st)/60000)).toFixed(0):0;return <><h2>⌨️ Typing ✅</h2><textarea value={txt} onChange={e=>{if(!st)setSt(Date.now());setTxt(e.target.value)}} style={{width:'100%',height:'80px'}}/><div>WPM: {wpm}</div><button onClick={()=>{setTxt('');setSt(null)}}>Reset</button></>}
+function ClickCounter(){const [c,setC]=useState(0);return <><h2>👆 Counter ✅</h2><div style={{fontSize:'40px',textAlign:'center'}}>{c}</div><button onClick={()=>setC(c+1)} style={{padding:'12px 28px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'10px',display:'block',margin:'10px auto'}}>CLICK</button><button onClick={()=>setC(0)} style={{display:'block',margin:'0 auto'}}>Reset</button></>}
+function TimerTool(){const [sec,setSec]=useState(0);const [run,setRun]=useState(false);useEffect(()=>{if(!run)return;const id=setInterval(()=>setSec(s=>s+1),1000);return()=>clearInterval(id)},[run]);return <><h2>⏲️ Timer ✅</h2><div style={{fontSize:'36px',textAlign:'center'}}>{Math.floor(sec/60).toString().padStart(2,'0')}:{(sec%60).toString().padStart(2,'0')}</div><div style={{display:'flex',gap:'8px',justifyContent:'center'}}><button onClick={()=>setRun(!run)} style={{padding:'8px 16px',background:run?'#ef4444':'#16a34a',color:'#fff',border:'none',borderRadius:'8px'}}>{run?'Pause':'Start'}</button><button onClick={()=>{setSec(0);setRun(false)}}>Reset</button></div></>}
