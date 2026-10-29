@@ -43,6 +43,40 @@ const TOOLS = [
   {id:'timer', name:'Timer & Stopwatch', cat:'Daily', icon:'⏲️', desc:'Timer'},
 ]
 
+function TrendingBox({cat}){
+  const items=[
+    {c:'Image', t:'Mechanical Keyboard RGB', p:'Rs 6,499', i:'⌨️', l:'https://www.daraz.pk/tag/mechanical-keyboard/', tag:'Daraz Trending'},
+    {c:'Image', t:'1TB SSD Portable', p:'Rs 14,999', i:'💾', l:'https://www.daraz.pk/tag/ssd-1tb/', tag:'Hot Sale'},
+    {c:'Image', t:'Laptop Stand Metal', p:'Rs 2,199', i:'💻', l:'https://www.daraz.pk/tag/laptop-stand/', tag:'10k+ Sold'},
+    {c:'Dev', t:'Wireless Mouse Logitech', p:'Rs 3,299', i:'🖱️', l:'https://www.daraz.pk/tag/wireless-mouse/', tag:'Best Seller'},
+    {c:'Dev', t:'Webcam 1080p Full HD', p:'Rs 4,500', i:'📹', l:'https://www.daraz.pk/tag/webcam/', tag:'For Devs'},
+    {c:'Dev', t:'USB Hub 7-in-1', p:'Rs 2,999', i:'🔌', l:'https://www.daraz.pk/tag/usb-hub/', tag:'Trending'},
+    {c:'Daily', t:'Smart Watch Ultra', p:'Rs 4,999', i:'⌚', l:'https://www.daraz.pk/tag/smart-watch/', tag:'Trending in PK'},
+    {c:'Daily', t:'TWS Earbuds Pro', p:'Rs 2,999', i:'🎧', l:'https://www.daraz.pk/tag/earbuds/', tag:'Flash Sale'},
+    {c:'Daily', t:'Power Bank 20000mAh', p:'Rs 3,499', i:'🔋', l:'https://www.daraz.pk/tag/power-bank/', tag:'Best Seller'},
+  ]
+  const list = cat==='All' ? items.slice(0,6) : items.filter(x=>x.c===cat).slice(0,3)
+  return (
+    <div style={{background:'#fffbeb',border:'1px solid #fde68a',borderRadius:'14px',padding:'14px',marginBottom:'18px'}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
+        <b style={{fontSize:'14px'}}>🔥 Trending in Pakistan - {cat==='All'?'For You':cat}</b>
+        <span style={{fontSize:'10px',background:'#fff',padding:'3px 8px',borderRadius:'20px',border:'1px solid #e5e7eb'}}>Updated Weekly • No affiliate yet</span>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(150px,1fr))',gap:'10px'}}>
+        {list.map((it,k)=>(
+          <a key={k} href={it.l} target="_blank" style={{textDecoration:'none',color:'inherit',background:'#fff',border:'1px solid #f3f4f6',borderRadius:'12px',padding:'12px',display:'block'}}>
+            <div style={{fontSize:'28px'}}>{it.i}</div>
+            <div style={{fontSize:'12px',fontWeight:'700',marginTop:'6px'}}>{it.t}</div>
+            <div style={{fontSize:'12px',color:'#16a34a',fontWeight:'700',marginTop:'4px'}}>{it.p}</div>
+            <div style={{fontSize:'10px',background:'#fef3c7',display:'inline-block',padding:'2px 6px',borderRadius:'10px',marginTop:'6px'}}>{it.tag}</div>
+            <div style={{marginTop:'8px',background:'#f8fafc',border:'1px solid #e2e8f0',textAlign:'center',padding:'6px',borderRadius:'8px',fontSize:'12px',fontWeight:'600'}}>View on Daraz →</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function App(){
   const [active,setActive]=useState(null)
   const [q,setQ]=useState('')
@@ -53,16 +87,17 @@ export default function App(){
     <div style={{minHeight:'100vh',background:'#f8fafc',fontFamily:'system-ui'}}>
       <header style={{background:'#fff',borderBottom:'1px solid #e2e8f0',position:'sticky',top:0,zIndex:10}}>
         <div style={{maxWidth:'1200px',margin:'0 auto',padding:'14px 20px',display:'flex',justifyContent:'space-between'}}>
-          <div onClick={()=>setActive(null)} style={{cursor:'pointer',fontWeight:'800'}}>WanaLab.pk - 40 Tools v3.3 PRO</div>
-          <span style={{background:'#dcfce7',color:'#166534',padding:'6px 12px',borderRadius:'20px',fontSize:'12px',fontWeight:'700'}}>● LIVE</span>
+          <div onClick={()=>setActive(null)} style={{cursor:'pointer',fontWeight:'800',display:'flex',alignItems:'center',gap:'8px'}}><div style={{width:'32px',height:'32px',background:'#2563eb',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff'}}>W</div>WanaLab.pk - v3.4</div>
+          <span style={{background:'#dcfce7',color:'#166534',padding:'6px 12px',borderRadius:'20px',fontSize:'12px',fontWeight:'700'}}>● 40 Tools LIVE</span>
         </div>
       </header>
       <div style={{maxWidth:'1200px',margin:'0 auto',padding:'20px'}}>
+        <TrendingBox cat={cat} />
         {!active ? <>
-          <div style={{textAlign:'center',padding:'20px 0'}}>
-            <h1 style={{margin:0}}>40 Tools - All Working ✅</h1>
-            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 40 tools..." style={{marginTop:'16px',padding:'14px 18px',width:'100%',maxWidth:'420px',borderRadius:'14px',border:'2px solid #e2e8f0'}}/>
-            <div style={{marginTop:'14px',display:'flex',gap:'8px',justifyContent:'center',flexWrap:'wrap'}}>
+          <div style={{textAlign:'center',padding:'10px 0 16px'}}>
+            <h1 style={{margin:0,fontSize:'26px'}}>40 Tools - All Working ✅</h1>
+            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 40 tools..." style={{marginTop:'14px',padding:'14px 18px',width:'100%',maxWidth:'420px',borderRadius:'14px',border:'2px solid #e2e8f0'}}/>
+            <div style={{marginTop:'12px',display:'flex',gap:'8px',justifyContent:'center',flexWrap:'wrap'}}>
               {cats.map(c=><button key={c} onClick={()=>setCat(c)} style={{padding:'8px 16px',borderRadius:'20px',border:'1px solid #e2e8f0',background:cat===c?'#2563eb':'#fff',color:cat===c?'#fff':'#334155',cursor:'pointer',fontWeight:'600'}}>{c}</button>)}
             </div>
           </div>
