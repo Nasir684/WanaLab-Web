@@ -76,24 +76,31 @@ function TrendingBox({cat}){
     </div>
   )
 }
+function AdSlot({label}){return <div style={{background:'#f8fafc',border:'1px dashed #cbd5e1',borderRadius:'10px',padding:'12px',textAlign:'center',color:'#94a3b8',fontSize:'12px',margin:'12px 0'}}>Ad Slot - {label} (AdSense here)</div>}
+function AboutPage(){return <div style={{lineHeight:'1.7'}}><h2>About WanaLab.pk - v3.4</h2><p>WanaLab.pk is Pakistan's free toolbox from Dera Ismail Khan, KPK. Built by Nasir - 40 tools, 100% private, all processing in browser.</p><p>Tools: Image, Text, Dev, Daily. No data leaves your device. Contact: hello@wanalab.pk</p></div>}
+function PrivacyPage(){return <div style={{lineHeight:'1.7'}}><h2>Privacy Policy - v3.4</h2><p><b>Updated: Oct 31, 2026</b></p><p>1. No data collection - all tools run locally in browser.</p><p>2. Cookies only for essential function. AdSense may use cookies later.</p><p>3. Daraz links are external, not affiliated yet.</p><p>4. Contact: privacy@wanalab.pk</p></div>}
+function ContactPage(){return <div style={{lineHeight:'1.7'}}><h2>Contact Us - v3.4</h2><p>Email: hello@wanalab.pk</p><p>DI Khan, KPK, Pakistan</p><div style={{marginTop:'16px',background:'#f1f5f9',padding:'16px',borderRadius:'12px'}}><input placeholder="Your Email" style={{width:'100%',padding:'10px',marginTop:'8px',borderRadius:'8px',border:'1px solid #ddd'}}/><textarea placeholder="Message" style={{width:'100%',height:'80px',marginTop:'8px',padding:'10px',borderRadius:'8px',border:'1px solid #ddd'}}/><button style={{marginTop:'8px',padding:'10px 20px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Send</button></div></div>}
 
 export default function App(){
   const [active,setActive]=useState(null)
+  const [page,setPage]=useState('home')
   const [q,setQ]=useState('')
   const [cat,setCat]=useState('All')
   const cats=['All','Image','Text','Dev','Daily']
   const filtered=TOOLS.filter(t=> (cat==='All'||t.cat===cat) && t.name.toLowerCase().includes(q.toLowerCase()))
+  const goHome=()=>{setPage('home');setActive(null)}
   return (
-    <div style={{minHeight:'100vh',background:'#f8fafc',fontFamily:'system-ui'}}>
+    <div style={{minHeight:'100vh',background:'#f8fafc',fontFamily:'system-ui',display:'flex',flexDirection:'column'}}>
       <header style={{background:'#fff',borderBottom:'1px solid #e2e8f0',position:'sticky',top:0,zIndex:10}}>
         <div style={{maxWidth:'1200px',margin:'0 auto',padding:'14px 20px',display:'flex',justifyContent:'space-between'}}>
-          <div onClick={()=>setActive(null)} style={{cursor:'pointer',fontWeight:'800',display:'flex',alignItems:'center',gap:'8px'}}><div style={{width:'32px',height:'32px',background:'#2563eb',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff'}}>W</div>WanaLab.pk - v3.4</div>
+          <div onClick={goHome} style={{cursor:'pointer',fontWeight:'800',display:'flex',alignItems:'center',gap:'8px'}}><div style={{width:'32px',height:'32px',background:'#2563eb',borderRadius:'8px',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff'}}>W</div>WanaLab.pk - v3.4</div>
           <span style={{background:'#dcfce7',color:'#166534',padding:'6px 12px',borderRadius:'20px',fontSize:'12px',fontWeight:'700'}}>● 40 Tools LIVE</span>
         </div>
       </header>
-      <div style={{maxWidth:'1200px',margin:'0 auto',padding:'20px'}}>
-        <TrendingBox cat={cat} />
-        {!active ? <>
+      <div style={{maxWidth:'1200px',margin:'0 auto',padding:'20px',flex:1,width:'100%'}}>
+        {page==='home' && <AdSlot label="Top Banner 728x90"/>}
+        {page==='home' && <TrendingBox cat={cat} />}
+        {page==='home' && !active ? <>
           <div style={{textAlign:'center',padding:'10px 0 16px'}}>
             <h1 style={{margin:0,fontSize:'26px'}}>40 Tools - All Working ✅</h1>
             <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 40 tools..." style={{marginTop:'14px',padding:'14px 18px',width:'100%',maxWidth:'420px',borderRadius:'14px',border:'2px solid #e2e8f0'}}/>
@@ -110,6 +117,14 @@ export default function App(){
               </div>
             ))}
           </div>
+          <AdSlot label="In-Grid Ad 300x250"/>
+        </> : page!=='home' ? <>
+          <button onClick={goHome} style={{padding:'10px 18px',borderRadius:'10px',border:'1px solid #e2e8f0',background:'#fff',cursor:'pointer',fontWeight:'600'}}>← Home</button>
+          <div style={{marginTop:'14px',background:'#fff',border:'1px solid #e2e8f0',borderRadius:'18px',padding:'22px'}}>
+            {page==='about' && <AboutPage/>}
+            {page==='privacy' && <PrivacyPage/>}
+            {page==='contact' && <ContactPage/>}
+          </div>
         </> : <>
           <button onClick={()=>setActive(null)} style={{padding:'10px 18px',borderRadius:'10px',border:'1px solid #e2e8f0',background:'#fff',cursor:'pointer',fontWeight:'600'}}>← All Tools</button>
           <div style={{marginTop:'14px',background:'#fff',border:'1px solid #e2e8f0',borderRadius:'18px',padding:'22px'}}>
@@ -117,20 +132,22 @@ export default function App(){
           </div>
         </>}
       </div>
+      <footer style={{background:'#fff',borderTop:'1px solid #e2e8f0',marginTop:'30px',padding:'24px 20px'}}>
+        <div style={{maxWidth:'1200px',margin:'0 auto',display:'flex',flexWrap:'wrap',gap:'24px',justifyContent:'space-between'}}>
+          <div><b>WanaLab.pk v3.4</b><div style={{fontSize:'12px',color:'#64748b',marginTop:'6px'}}>Free tools for Pakistan 🇵🇰<br/>Made in DI Khan, KPK</div></div>
+          <div style={{display:'flex',gap:'16px',fontSize:'13px'}}>
+            <span onClick={()=>setPage('about')} style={{cursor:'pointer',color:'#2563eb',fontWeight:'600'}}>About</span>
+            <span onClick={()=>setPage('privacy')} style={{cursor:'pointer',color:'#2563eb',fontWeight:'600'}}>Privacy</span>
+            <span onClick={()=>setPage('contact')} style={{cursor:'pointer',color:'#2563eb',fontWeight:'600'}}>Contact</span>
+            <span style={{color:'#64748b'}}>© 2026 WanaLab</span>
+          </div>
+        </div>
+        <div style={{maxWidth:'1200px',margin:'0 auto'}}><AdSlot label="Footer Ad 728x90"/></div>
+      </footer>
     </div>
   )
 }
-
-function ToolRenderer({id}){
-  const map={
-    compress: <ImageCompressor/>, resize: <ImageResizer/>, convert: <ImageConverter/>, rotate: <ImageRotator/>, flip: <ImageFlipper/>, filter: <ImageFilters/>, base64: <ImageToBase64/>, bgprev: <BGPreview/>, crop: <SmartCrop/>, pixel: <Pixelate/>,
-    words: <WordCounter/>, case: <CaseChanger/>, lorem: <LoremGen/>, dedupe: <Dedupe/>, jsonfmt: <JSONFmt/>, b64: <B64Text/>, urlenc: <URLEnc/>, reverse: <ReverseText/>, replace: <FindReplace/>, diff: <TextDiff/>,
-    qr: <QRGen/>, pass: <PassGen/>, color: <ColorPicker/>, uuid: <UUIDGen/>, hash: <HashGen/>, regex: <RegexTest/>, minify: <Minify/>, csv: <JSON2CSV/>, binary: <BinaryConv/>, timestamp: <TimestampTool/>,
-    bmi: <BMICalc/>, age: <AgeCalc/>, percent: <PercentCalc/>, emi: <EMICalc/>, discount: <DiscountCalc/>, unit: <UnitConv/>, time: <TimeDiffTool/>, typing: <TypingSpeed/>, counter: <ClickCounter/>, timer: <TimerTool/>
-  }
-  return map[id]||<div>Tool {id}</div>
-}
-
+function ToolRenderer({id}){const map={compress: <ImageCompressor/>, resize: <ImageResizer/>, convert: <ImageConverter/>, rotate: <ImageRotator/>, flip: <ImageFlipper/>, filter: <ImageFilters/>, base64: <ImageToBase64/>, bgprev: <BGPreview/>, crop: <SmartCrop/>, pixel: <Pixelate/>, words: <WordCounter/>, case: <CaseChanger/>, lorem: <LoremGen/>, dedupe: <Dedupe/>, jsonfmt: <JSONFmt/>, b64: <B64Text/>, urlenc: <URLEnc/>, reverse: <ReverseText/>, replace: <FindReplace/>, diff: <TextDiff/>, qr: <QRGen/>, pass: <PassGen/>, color: <ColorPicker/>, uuid: <UUIDGen/>, hash: <HashGen/>, regex: <RegexTest/>, minify: <Minify/>, csv: <JSON2CSV/>, binary: <BinaryConv/>, timestamp: <TimestampTool/>, bmi: <BMICalc/>, age: <AgeCalc/>, percent: <PercentCalc/>, emi: <EMICalc/>, discount: <DiscountCalc/>, unit: <UnitConv/>, time: <TimeDiffTool/>, typing: <TypingSpeed/>, counter: <ClickCounter/>, timer: <TimerTool/>};return map[id]||<div>Tool {id}</div>}
 function ImageCompressor(){const [m,setM]=useState('');return <><h2>🗜️ Compressor ✅</h2><input type="file" accept="image/*" onChange={e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=img.width*0.7;c.height=img.height*0.7;c.getContext('2d').drawImage(img,0,0,c.width,c.height);const a=document.createElement('a');a.href=c.toDataURL('image/jpeg',0.6);a.download='compressed-'+f.name+'.jpg';a.click();setM('✅ Downloaded!')};img.src=ev.target.result};r.readAsDataURL(f)}}/><p style={{color:'green'}}>{m}</p></>}
 function ImageResizer(){const [w,setW]=useState(400);const [h,setH]=useState(300);const [s,setS]=useState(null);return <><h2>📐 Resizer ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><div style={{marginTop:'10px'}}>W:<input type="number" value={w} onChange={e=>setW(+e.target.value)} style={{width:'80px'}}/> H:<input type="number" value={h} onChange={e=>setH(+e.target.value)} style={{width:'80px'}}/></div>{s&&<button onClick={()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);const a=document.createElement('a');a.href=c.toDataURL();a.download=`resized-${w}x${h}.png`;a.click()};img.src=s}} style={{marginTop:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Download</button>}</>}
 function ImageConverter(){const [s,setS]=useState(null);const [f,setF]=useState('image/jpeg');return <><h2>🔄 Converter ✅</h2><input type="file" accept="image/*" onChange={e=>{const r=new FileReader();r.onload=ev=>setS(ev.target.result);r.readAsDataURL(e.target.files[0])}}/><br/><select value={f} onChange={e=>setF(e.target.value)} style={{marginTop:'10px'}}><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select>{s&&<button onClick={()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);const a=document.createElement('a');a.href=c.toDataURL(f);a.download='converted.'+f.split('/')[1];a.click()};img.src=s}} style={{marginLeft:'10px',padding:'8px 16px',background:'#2563eb',color:'#fff',border:'none',borderRadius:'8px'}}>Convert</button>}</>}
