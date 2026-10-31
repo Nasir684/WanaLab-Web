@@ -1,3 +1,4 @@
+// WanaLab v3.4 MEGA 60 Tools - Build Fix 31 Oct 2026
 import { useState, useEffect } from 'react'
 
 const TOOLS = [
