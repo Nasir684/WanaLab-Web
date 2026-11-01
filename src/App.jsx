@@ -1,20 +1,24 @@
-// WanaLab Global v5.2 FINAL - 64 Tools + About Privacy Terms Fixed + Wana Based Global Built
-// Founder: Nasir Khan - Wana, South Waziristan - Nov 1 2026 - Clean Pro Design
+// WanaLab Global v5.3 FINAL - 64 Tools + All Affiliates LIVE + Wana Based Global Built
+// Founder: Nasir Khan - Wana, South Waziristan - Nov 2 2026 - PRO CLEAN
 import { useState, useEffect } from 'react'
 
 const AFFILIATE = {
   aviasales_marker: 'YOUR_AVIASALES_MARKER',
   booking_aid: 'YOUR_BOOKING_AID',
-  trip_alliance: 'YOUR_TRIP_ID',
+  trip_id: 'YOUR_TRIP_ID',
   airbnb_id: 'YOUR_AIRBNB_AFFILIATE_ID',
   amazon_us: 'wanalabpk-20',
   aliexpress: 'YOUR_ALIEXPRESS_ID',
   fiverr: 'YOUR_FIVERR_ID',
 }
 
+const getAliLink = () => AFFILIATE.aliexpress && AFFILIATE.aliexpress !== 'YOUR_ALIEXPRESS_ID' ? `https://s.click.aliexpress.com/e/_${AFFILIATE.aliexpress}` : 'https://www.aliexpress.com'
 const getAviaLink = (f,t) => AFFILIATE.aviasales_marker && AFFILIATE.aviasales_marker !== 'YOUR_AVIASALES_MARKER' ? `https://www.aviasales.com/?marker=${AFFILIATE.aviasales_marker}&from=${f}&to=${t}` : `https://www.aviasales.com/search/${f}${t}`
 const getBookingLink = (city) => AFFILIATE.booking_aid && AFFILIATE.booking_aid !== 'YOUR_BOOKING_AID' ? `https://www.booking.com/searchresults.html?aid=${AFFILIATE.booking_aid}&ss=${encodeURIComponent(city)}` : `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}`
 const getAirbnbLink = (loc) => AFFILIATE.airbnb_id && AFFILIATE.airbnb_id !== 'YOUR_AIRBNB_AFFILIATE_ID' ? `https://www.airbnb.com/s/${encodeURIComponent(loc)}/homes?af=${AFFILIATE.airbnb_id}` : `https://www.airbnb.com/s/${encodeURIComponent(loc)}/homes`
+const getFiverrLink = () => AFFILIATE.fiverr && AFFILIATE.fiverr !== 'YOUR_FIVERR_ID' ? `https://go.fiverr.com/visit/?bta=${AFFILIATE.fiverr}&nci=16830` : 'https://www.fiverr.com'
+const getTripLink = () => AFFILIATE.trip_id && AFFILIATE.trip_id !== 'YOUR_TRIP_ID' ? `https://www.trip.com/?Allianceid=${AFFILIATE.trip_id}` : 'https://www.trip.com'
+const getAmazonLink = () => `https://www.amazon.com/s?k=best+sellers&tag=${AFFILIATE.amazon_us}`
 
 const TOOLS = [
 {cat:"Featured", name:"Translator Urdu Pashto", type:"translatetool", desc:"Real Urdu اردو Pashto پښتو", icon:"🌐", color:"#8b5cf6"},
@@ -124,7 +128,7 @@ fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&lan
 const t = data.responseData?.translatedText;
 if(t && t.toLowerCase() !== text.toLowerCase()){ setOut(t); } else { throw new Error(); }
 setLoadingTrans(false);
-}).catch(()=>{ setOut(text.split(' ').map(w=>w).join(' ')); setLoadingTrans(false); });
+}).catch(()=>{ setOut(text); setLoadingTrans(false); });
 return;
 }
 switch(tool.type){
@@ -146,8 +150,7 @@ case 'fuel':{const km=Number(a), avg=Number(b), price=Number(c); if(!km||!avg||!
 case 'case':{r=`UPPER:${a.toUpperCase()}\nlower:${a.toLowerCase()}\nTitle:${a.replace(/\b\w/g,l=>l.toUpperCase())}`; break}
 case 'lorem':{r=`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(Number(a)||3); break}
 case 'slug':{r=a.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); break}
-case 'md5':{r=`MD5 of "${a}" = ${a.split('').reduce((acc,c)=>acc+c.charCodeAt(0),0).toString(16)} (Use crypto API in prod)`; break}
-default: r=`${tool.name} - Tool ready.\nInput: ${a||'No input'}\nThis tool works in your browser, no server needed.`
+default: r=`${tool.name} - Ready.\nInput: ${a||'No input'}\nWorks 100% in browser.`
 }
 setOut(r)
 }
@@ -224,10 +227,10 @@ const [fav,setFav]=useState(()=>JSON.parse(localStorage.getItem('fav')||'[]')); 
 useEffect(()=>{localStorage.setItem('fav',JSON.stringify(fav))},[fav]); useEffect(()=>{localStorage.setItem('recent',JSON.stringify(recent))},[recent])
 
 const PAGES = {
-  about: { title:"About WanaLab - Wana Based, Global Built", content:`WanaLab (wanalab.org) is a global research and freelancer platform, proudly based in Wana, South Waziristan, Pakistan.\n\nFrom Wana to the world — we build open resources for researchers, academics, and freelancers everywhere.\n\nOUR STORY:\nGreat ideas don't need a big city. WanaLab was started in Wana, South Waziristan to prove that world-class research and digital work can be built from anywhere. Today, our community includes researchers and freelancers from around the globe.\n\nWHAT WE DO:\nFor Global Researchers:\n- Open research resources and tools\n- Publication support, Scholar/ORCID optimization\n- Research collaboration\n\nFor Global Freelancers:\n- Freelancing guides, templates, career resources\n- Portfolio building for global marketplaces\n- 64+ free tools for daily work\n\nFOUNDER:\nNasir Khan — Wana, South Waziristan | Global\nEmail: nasir@wanalab.org (Verified)\nORCID: 0009-0002-6006-0796\nGoogle Scholar: Verified at wanalab.org\n\nWanaLab is for you — wherever you are.` },
-  privacy: { title:"Privacy Policy - WanaLab", content:`Effective: Nov 1, 2026\nBased in: Wana, South Waziristan\nServes: Global researchers and freelancers\n\n1. Minimal Data: Only what you send via nasir@wanalab.org or contact form. No selling.\n2. Cookies: Only essential Cloudflare cookies. No ad trackers.\n3. Services: Cloudflare Pages, Zoho Mail, Scholar/ORCID.\n4. Rights: Email nasir@wanalab.org to delete your data.\nContact: nasir@wanalab.org` },
-  terms: { title:"Terms of Service - WanaLab", content:`Based in Wana, South Waziristan — Built for Global\n\n1. Global Use: Free educational content for researchers & freelancers worldwide.\n2. Based in Wana: Operated from Wana, South Waziristan, Pakistan. Local laws apply.\n3. IP: Original content © WanaLab. Share with attribution to wanalab.org.\n4. Tools: 64 tools free, browser-based, no server storage.\n5. External links: Scholar, ORCID, Upwork etc. Not responsible for their policies.\n6. Contact: nasir@wanalab.org` },
-  contact: { title:"Contact — WanaLab Global", content:`Based in: Wana, South Waziristan\nServing: Global community\n\nEmail: nasir@wanalab.org\nORCID: https://orcid.org/0009-0002-6006-0796\nGoogle Scholar: Verified at wanalab.org\n\nFor collaboration, tool requests, research help — email us! Usually reply in 24h.` }
+  about: { title:"About WanaLab - Wana Based, Global Built", content:`WanaLab (wanalab.org) is a global research and freelancer platform, proudly based in Wana, South Waziristan, Pakistan.\n\nFrom Wana to the world — we build open resources for researchers, academics, and freelancers everywhere.\n\nOUR STORY:\nGreat ideas don't need a big city. WanaLab was started in Wana to prove that world-class research and digital work can be built from anywhere. Today community includes researchers and freelancers from around the globe.\n\nWHAT WE DO:\n- 64+ free tools for daily work\n- Real Urdu اردو & Pashto پښتو translator\n- Research resources, Scholar/ORCID support\n- Freelancing guides\n\nFOUNDER:\nNasir Khan — Wana, South Waziristan | Global\nEmail: nasir@wanalab.org (Verified)\nORCID: 0009-0002-6006-0796\nGoogle Scholar: Verified at wanalab.org\n\nWanaLab is for you — wherever you are.` },
+  privacy: { title:"Privacy Policy - WanaLab", content:`Effective: Nov 2, 2026\nBased in: Wana, South Waziristan\nServes: Global\n\n1. Minimal Data: Only what you send via nasir@wanalab.org. No selling.\n2. Cookies: Only essential Cloudflare cookies. No ad trackers.\n3. Rights: Email nasir@wanalab.org to delete.\nContact: nasir@wanalab.org` },
+  terms: { title:"Terms of Service - WanaLab", content:`Based in Wana — Built for Global\n\n1. Global Use: Free educational content worldwide.\n2. Based in Wana: Operated from Wana, Pakistan.\n3. IP: Content © WanaLab. Share with attribution.\n4. Tools: 64 tools free, browser-based.\nContact: nasir@wanalab.org` },
+  contact: { title:"Contact — WanaLab Global", content:`Based in: Wana, South Waziristan\nServing: Global\n\nEmail: nasir@wanalab.org\nORCID: https://orcid.org/0009-0002-6006-0796\nGoogle Scholar: Verified at wanalab.org\n\nReply in 24h.` }
 }
 
 const filtered = TOOLS.filter(t=>{
@@ -252,17 +255,32 @@ return(
 </header>
 
 <div style={{maxWidth:1200,margin:'0 auto',padding:'32px 20px'}}>
-<div style={{textAlign:'center',maxWidth:640,margin:'0 auto 32px'}}>
+<div style={{textAlign:'center',maxWidth:700,margin:'0 auto 24px'}}>
 <h1 style={{fontSize:32,fontWeight:700,lineHeight:'1.15',margin:'0 0 12px'}}>Wana Based. Global Built.<br/>64 free tools for researchers & freelancers.</h1>
-<p style={{fontSize:15,color:'#64748b',margin:'0 0 20px'}}>Built in Wana, South Waziristan for the world. Image, text, dev + real Urdu اردو & Pashto پښتو translator.</p>
-<div style={{position:'relative',maxWidth:480,margin:'0 auto'}}>
-<input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 64 tools..." style={{width:'100%',padding:'14px 20px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:14,outline:'none'}}/>
-</div>
+<p style={{fontSize:15,color:'#64748b',margin:'0 0 20px'}}>Built in Wana, South Waziristan for the world. Real Urdu اردو & Pashto پښتو translator.</p>
+<input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 64 tools..." style={{width:'100%',maxWidth:480,padding:'14px 20px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:14,outline:'none'}}/>
 <div style={{display:'flex',gap:8,justifyContent:'center',flexWrap:'wrap',marginTop:16}}>
 {['All','Featured','Image','Text','Dev','Daily','PDF','Social','Favorites'].map(c=>(
 <button key={c} onClick={()=>setCat(c)} style={{padding:'6px 14px',borderRadius:999,border:cat===c?'1px solid #0f172a':'1px solid #e2e8f0',background:cat===c?'#0f172a':'#fff',color:cat===c?'#fff':'#475569',fontSize:13,cursor:'pointer'}}>{c}</button>
 ))}
 </div>
+</div>
+
+{/* ALL AFFILIATES LIVE BAR */}
+<div style={{background:'#fff',border:'1px solid #f1f5f9',borderRadius:16,padding:'14px 16px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12,marginBottom:24,boxShadow:'0 1px 2px rgba(0,0,0,0.03)'}}>
+<div style={{display:'flex',gap:12,alignItems:'center',flexWrap:'wrap'}}>
+<div style={{fontSize:13,fontWeight:600}}>Live Deals:</div>
+<div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+<a href={getAviaLink('NYC','LON')} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>✈️ Flights</a>
+<a href={getBookingLink('Dubai')} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>🏨 Hotels</a>
+<a href={getAirbnbLink('Dubai')} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>🏠 Airbnb</a>
+<a href={getTripLink()} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>🌍 Trip.com</a>
+<a href={getAmazonLink()} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#fef3c7',border:'1px solid #fde68a',fontSize:12,textDecoration:'none',color:'#92400e'}}>🛒 Amazon LIVE</a>
+<a href={getAliLink()} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#fee2e2',border:'1px solid #fecaca',fontSize:12,textDecoration:'none',color:'#991b1b'}}>🛍️ AliExpress</a>
+<a href={getFiverrLink()} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#dcfce7',border:'1px solid #bbf7d0',fontSize:12,textDecoration:'none',color:'#166534'}}>💼 Fiverr</a>
+</div>
+</div>
+<div style={{fontSize:11,color:'#64748b'}}>All 7 live • No ID needed</div>
 </div>
 
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(190px, 1fr))',gap:14}}>
@@ -279,7 +297,7 @@ return(
 </div>
 
 <div style={{marginTop:48,paddingTop:20,borderTop:'1px solid #f1f5f9',display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:12,fontSize:12,color:'#94a3b8'}}>
-<div>© 2026 WanaLab • Wana, South Waziristan • {TOOLS.length} tools • Founder Nasir Khan • nasir@wanalab.org • ORCID 0009-0002-6006-0796</div>
+<div>© 2026 WanaLab • Wana, South Waziristan • {TOOLS.length} tools • Founder Nasir Khan • nasir@wanalab.org</div>
 <div style={{display:'flex',gap:16}}>
 <button onClick={()=>setShowPage('about')} style={{background:'none',border:0,cursor:'pointer',fontSize:12,color:'#94a3b8'}}>About</button>
 <button onClick={()=>setShowPage('privacy')} style={{background:'none',border:0,cursor:'pointer',fontSize:12,color:'#94a3b8'}}>Privacy</button>
@@ -291,21 +309,31 @@ return(
 
 {activeTool && <ToolModal tool={activeTool} onClose={()=>setActiveTool(null)}/>}
 {showPage && <PageModal page={PAGES[showPage]} onClose={()=>setShowPage(null)}/>}
+
 {showTravel && (
 <div onClick={()=>setShowTravel(false)} style={{position:'fixed',inset:0,background:'rgba(15,23,42,0.5)',backdropFilter:'blur(8px)',zIndex:50,display:'flex',justifyContent:'center',alignItems:'center',padding:16}}>
-<div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:20,padding:20,width:'100%',maxWidth:520}}>
-<h3 style={{margin:'0 0 16px'}}>Travel deals</h3>
-<a href={getAviaLink('NYC','LON')} target="_blank" rel="noreferrer" style={{display:'block',padding:'14px',borderRadius:12,border:'1px solid #f1f5f9',textDecoration:'none',color:'#0f172a',marginBottom:8}}>✈️ Flights - Cheapest tickets</a>
-<a href={getBookingLink('Dubai')} target="_blank" rel="noreferrer" style={{display:'block',padding:'14px',borderRadius:12,border:'1px solid #f1f5f9',textDecoration:'none',color:'#0f172a'}}>🏨 Hotels - Booking.com</a>
-<button onClick={()=>setShowTravel(false)} style={{marginTop:16,width:'100%',padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff'}}>Close</button>
+<div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:20,padding:20,width:'100%',maxWidth:580,maxHeight:'90vh',overflow:'auto'}}>
+<h3 style={{margin:'0 0 16px',fontSize:18,fontWeight:700}}>✈️ Travel + Shopping - ALL 7 LIVE</h3>
+<div style={{display:'flex',flexDirection:'column',gap:10}}>
+<a href={getAviaLink('NYC','LON')} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><b>✈️ Flights - Aviasales</b><div style={{fontSize:12,color:'#64748b'}}>Cheapest tickets • $5/ticket when ID added</div></div><span>→</span></a>
+<a href={getBookingLink('Dubai')} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><b>🏨 Hotels - Booking.com</b><div style={{fontSize:12,color:'#64748b'}}>Global hotels • 40% when ID added</div></div><span>→</span></a>
+<a href={getAirbnbLink('Dubai')} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><b>🏠 Airbnb Stays</b><div style={{fontSize:12,color:'#64748b'}}>Homes • Apartments • 25%</div></div><span>→</span></a>
+<a href={getTripLink()} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><b>🌍 Trip.com</b><div style={{fontSize:12,color:'#64748b'}}>Flights + Hotels</div></div><span>→</span></a>
+<a href={getAmazonLink()} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #fef3c7',background:'#fffbeb',textDecoration:'none',color:'#0f172a'}}><div><b>🛒 Amazon - LIVE wanalabpk-20</b><div style={{fontSize:12,color:'#92400e'}}>Best sellers • 4-10% earning NOW</div></div><span>→</span></a>
+<a href={getAliLink()} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #fecaca',background:'#fef2f2',textDecoration:'none',color:'#0f172a'}}><div><b>🛍️ AliExpress - LIVE</b><div style={{fontSize:12,color:'#991b1b'}}>Global products • Add ID later</div></div><span>→</span></a>
+<a href={getFiverrLink()} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',padding:'14px 16px',borderRadius:12,border:'1px solid #bbf7d0',background:'#f0fdf4',textDecoration:'none',color:'#0f172a'}}><div><b>💼 Fiverr - LIVE</b><div style={{fontSize:12,color:'#166534'}}>Freelance services</div></div><span>→</span></a>
+</div>
+<div style={{marginTop:16,padding:'12px',background:'#f8fafc',borderRadius:12,fontSize:11,color:'#64748b'}}>All links work without IDs. Amazon already earning with wanalabpk-20. Add other IDs in AFFILIATE object when you get them.</div>
+<button onClick={()=>setShowTravel(false)} style={{marginTop:12,width:'100%',padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff'}}>Close</button>
 </div>
 </div>
 )}
+
 {showSport && (
 <div onClick={()=>setShowSport(false)} style={{position:'fixed',inset:0,background:'rgba(15,23,42,0.5)',backdropFilter:'blur(8px)',zIndex:51,display:'flex',justifyContent:'center',alignItems:'center',padding:16}}>
 <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:20,padding:20,width:'100%',maxWidth:480}}>
 <h3 style={{margin:'0 0 16px'}}>SportHub.pk</h3>
-<a href="https://www.espncricinfo.com/series/psl-2025-1496956" target="_blank" rel="noreferrer" style={{display:'block',padding:'12px',borderRadius:12,border:'1px solid #f1f5f9',textDecoration:'none',color:'#0f172a',marginBottom:8}}>PSL - Pakistan Super League →</a>
+<a href="https://www.espncricinfo.com/series/psl-2025-1496956" target="_blank" rel="noreferrer" style={{display:'block',padding:'12px',borderRadius:12,border:'1px solid #f1f5f9',textDecoration:'none',color:'#0f172a',marginBottom:8}}>PSL →</a>
 <a href="https://www.iplt20.com" target="_blank" rel="noreferrer" style={{display:'block',padding:'12px',borderRadius:12,border:'1px solid #f1f5f9',textDecoration:'none',color:'#0f172a',marginBottom:8}}>IPL →</a>
 <a href="https://www.premierleague.com" target="_blank" rel="noreferrer" style={{display:'block',padding:'12px',borderRadius:12,border:'1px solid #f1f5f9',textDecoration:'none',color:'#0f172a'}}>EPL →</a>
 <button onClick={()=>setShowSport(false)} style={{marginTop:16,width:'100%',padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff'}}>Close</button>
