@@ -1,5 +1,5 @@
-// WanaLab Global v5.0 PRO CLEAN - Professional Design - 64 Tools + Real Urdu Pashto + Travel Affiliate
-// Founder: Nasir Khan - Nov 1 2026 - Clean like TinyWow / iLovePDF
+// WanaLab Global v5.1 - Wana Based, Global Built - 64 Tools + About Privacy Terms Fixed
+// Founder: Nasir Khan - Wana, South Waziristan - Nov 1 2026
 import { useState, useEffect } from 'react'
 
 const AFFILIATE = {
@@ -16,7 +16,6 @@ const getAliLink = () => AFFILIATE.aliexpress && AFFILIATE.aliexpress !== 'YOUR_
 const getAviaLink = (f,t) => AFFILIATE.aviasales_marker && AFFILIATE.aviasales_marker !== 'YOUR_AVIASALES_MARKER' ? `https://www.aviasales.com/?marker=${AFFILIATE.aviasales_marker}&from=${f}&to=${t}` : `https://www.aviasales.com/search/${f}${t}`
 const getBookingLink = (city) => AFFILIATE.booking_aid && AFFILIATE.booking_aid !== 'YOUR_BOOKING_AID' ? `https://www.booking.com/searchresults.html?aid=${AFFILIATE.booking_aid}&ss=${encodeURIComponent(city)}` : `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}`
 const getAirbnbLink = (loc) => AFFILIATE.airbnb_id && AFFILIATE.airbnb_id !== 'YOUR_AIRBNB_AFFILIATE_ID' ? `https://www.airbnb.com/s/${encodeURIComponent(loc)}/homes?af=${AFFILIATE.airbnb_id}` : `https://www.airbnb.com/s/${encodeURIComponent(loc)}/homes`
-const getFiverrLink = () => AFFILIATE.fiverr && AFFILIATE.fiverr !== 'YOUR_FIVERR_ID' ? `https://go.fiverr.com/visit/?bta=${AFFILIATE.fiverr}&nci=16830` : 'https://www.fiverr.com'
 
 const TOOLS = [
 {cat:"Featured", name:"Translator Urdu Pashto", type:"translatetool", desc:"Real Urdu اردو Pashto پښتو", icon:"🌐", color:"#8b5cf6"},
@@ -57,6 +56,22 @@ const TOOLS = [
 {cat:"Daily", name:"Unit Converter", type:"unit", desc:"Length, weight, temp", icon:"📏", color:"#ec4899"},
 ]
 
+function PageModal({page,onClose}){
+  return(
+    <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(15,23,42,0.6)',backdropFilter:'blur(8px)',zIndex:200,display:'flex',justifyContent:'center',alignItems:'flex-start',padding:16,overflow:'auto'}}>
+      <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:24,padding:24,width:'100%',maxWidth:720,marginTop:40,marginBottom:40,boxShadow:'0 25px 50px -12px rgba(0,0,0,0.25)'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+          <h2 style={{margin:0,fontSize:22,fontWeight:700}}>{page.title}</h2>
+          <button onClick={onClose} style={{width:32,height:32,borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',cursor:'pointer'}}>✕</button>
+        </div>
+        <div style={{fontSize:14,lineHeight:'1.7',color:'#334155',whiteSpace:'pre-wrap'}}>{page.content}</div>
+        {page.extra}
+        <button onClick={onClose} style={{marginTop:24,width:'100%',padding:'12px',background:'#0f172a',color:'#fff',borderRadius:12,border:0,fontWeight:600,cursor:'pointer'}}>Close</button>
+      </div>
+    </div>
+  )
+}
+
 function ToolModal({tool,onClose}){
 const [a,setA]=useState(''); const [b,setB]=useState(''); const [c,setC]=useState(''); const [out,setOut]=useState(''); const [img,setImg]=useState(null); const [img2,setImg2]=useState(null); const [quality,setQuality]=useState(0.7); const [w,setW]=useState(400); const [h,setH]=useState(300); const [qrSize,setQrSize]=useState(250); const [passLen,setPassLen]=useState(16); const [fromLang,setFromLang]=useState('en'); const [toLang,setToLang]=useState('ps'); const [loadingTrans,setLoadingTrans]=useState(false)
 
@@ -86,9 +101,7 @@ fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&lan
 .then(res=>res.json())
 .then(data=>{
 const t = data.responseData?.translatedText;
-if(t && t.toLowerCase() !== text.toLowerCase()){
-setOut(`${t}`);
-} else { throw new Error(); }
+if(t && t.toLowerCase() !== text.toLowerCase()){ setOut(`${t}`); } else { throw new Error(); }
 setLoadingTrans(false);
 })
 .catch(()=>{
@@ -132,11 +145,11 @@ return(
 
 {tool.type==='translatetool' && (
 <div>
-<textarea value={a} onChange={e=>setA(e.target.value)} placeholder="Type text here... e.g. Hello world I am here" style={{width:'100%',minHeight:100,padding:'16px',borderRadius:16,border:'1px solid #e2e8f0',fontSize:15,outline:'none',background:'#f8fafc'}}/>
+<textarea value={a} onChange={e=>setA(e.target.value)} placeholder="Type text here... e.g. Hello world" style={{width:'100%',minHeight:100,padding:'16px',borderRadius:16,border:'1px solid #e2e8f0',fontSize:15,outline:'none',background:'#f8fafc'}}/>
 <div style={{display:'flex',gap:8,marginTop:12}}>
 <select value={fromLang} onChange={e=>setFromLang(e.target.value)} style={{flex:1,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff'}}><option value="en">English</option><option value="ur">Urdu - اردو</option><option value="ps">Pashto - پښتو</option><option value="ar">Arabic</option></select>
 <span style={{display:'flex',alignItems:'center',padding:'0 8px'}}>→</span>
-<select value={toLang} onChange={e=>setToLang(e.target.value)} style={{flex:1,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff',fontWeight:600}}><option value="ps">Pashto - پښتو</option><option value="ur">Urdu - اردو</option><option value="en">English</option><option value="ar">Arabic</option></select>
+<select value={toLang} onChange={e=>setToLang(e.target.value)} style={{flex:1,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff',fontWeight:600}}><option value="ps">Pashto - پښتو</option><option value="ur">Urdu - اردو</option><option value="en">English</option></select>
 </div>
 <button onClick={run} disabled={loadingTrans} style={{marginTop:16,width:'100%',padding:'14px',background:'#0f172a',color:'#fff',borderRadius:12,border:0,fontWeight:600,cursor:'pointer'}}>{loadingTrans?'Translating...':'Translate'}</button>
 {out && <div style={{marginTop:16,padding:'16px',background:'#f8fafc',borderRadius:16,border:'1px solid #e2e8f0',fontSize:20,lineHeight:'1.6',fontWeight:500,textAlign: toLang==='ur'||toLang==='ps'?'right':'left',direction: toLang==='ur'||toLang==='ps'?'rtl':'ltr'}}>{out}</div>}
@@ -153,7 +166,7 @@ return(
 {tool.type==='flipper' && <select value={a} onChange={e=>setA(e.target.value)} style={{width:'100%',marginTop:12,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0'}}><option value="h">Flip Horizontal</option><option value="v">Flip Vertical</option></select>}
 {tool.type==='filters' && <select value={b} onChange={e=>setB(e.target.value)} style={{width:'100%',marginTop:12,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0'}}><option value="grayscale(100%)">Grayscale</option><option value="sepia(100%)">Sepia</option><option value="blur(5px)">Blur</option></select>}
 {tool.type==='meme' && <div style={{display:'flex',flexDirection:'column',gap:8,marginTop:12}}><input value={a} onChange={e=>setA(e.target.value)} placeholder="Top text" style={{padding:'12px',borderRadius:12,border:'1px solid #e2e8f0'}}/><input value={b} onChange={e=>setB(e.target.value)} placeholder="Bottom text" style={{padding:'12px',borderRadius:12,border:'1px solid #e2e8f0'}}/></div>}
-{tool.type==='watermark' && <input value={a} onChange={e=>setA(e.target.value)} placeholder="Watermark text e.g. WanaLab.pk" style={{width:'100%',marginTop:12,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0'}}/>}
+{tool.type==='watermark' && <input value={a} onChange={e=>setA(e.target.value)} placeholder="Watermark text e.g. WanaLab" style={{width:'100%',marginTop:12,padding:'12px',borderRadius:12,border:'1px solid #e2e8f0'}}/>}
 {img && <img src={img} style={{width:'100%',marginTop:12,borderRadius:12,maxHeight:200,objectFit:'contain',background:'#f8fafc'}} alt=""/>}
 <button onClick={processImage} style={{marginTop:12,width:'100%',padding:'12px',background:'#0f172a',color:'#fff',borderRadius:12,border:0,fontWeight:600}}>Apply</button>
 {img2 && img2.startsWith('data:') && <><img src={img2} style={{width:'100%',marginTop:12,borderRadius:12}} alt=""/><a href={img2} download={`wanalab-${tool.type}.jpg`} style={{display:'block',marginTop:12,background:'#10b981',color:'#fff',padding:'12px',textAlign:'center',borderRadius:12,textDecoration:'none',fontWeight:600}}>Download Image</a></>}
@@ -190,9 +203,119 @@ return(
 }
 
 export default function App(){
-const [cat,setCat]=useState('All'); const [q,setQ]=useState(''); const [showTravel,setShowTravel]=useState(false); const [showSport,setShowSport]=useState(false); const [activeTool,setActiveTool]=useState(null)
+const [cat,setCat]=useState('All'); const [q,setQ]=useState(''); const [showTravel,setShowTravel]=useState(false); const [showSport,setShowSport]=useState(false); const [activeTool,setActiveTool]=useState(null); const [showPage,setShowPage]=useState(null)
 const [fav,setFav]=useState(()=>JSON.parse(localStorage.getItem('fav')||'[]')); const [recent,setRecent]=useState(()=>JSON.parse(localStorage.getItem('recent')||'[]'))
 useEffect(()=>{localStorage.setItem('fav',JSON.stringify(fav))},[fav]); useEffect(()=>{localStorage.setItem('recent',JSON.stringify(recent))},[recent])
+
+const PAGES = {
+  about: {
+    title: "About WanaLab - Wana Based, Global Built",
+    content: `WanaLab (wanalab.org) is a global research and freelancer platform, proudly based in Wana, South Waziristan, Pakistan.
+
+From Wana to the world — we build open resources for researchers, academics, and freelancers everywhere.
+
+OUR STORY:
+Great ideas don't need a big city. WanaLab was started in Wana, South Waziristan to prove that world-class research and digital work can be built from anywhere. Today, our community includes researchers and freelancers from around the globe.
+
+WHAT WE DO:
+
+For Global Researchers:
+• Open research resources and tools
+• Publication support, academic profile optimization (Google Scholar, ORCID)
+• Research collaboration — connecting researchers across borders
+• Verified academic infrastructure at wanalab.org
+
+For Global Freelancers:
+• Freelancing guides, templates, and career resources
+• Portfolio and profile building for global marketplaces
+• Remote work best practices from real experience
+• 64+ free tools for daily work
+
+WHY WANA?
+Because innovation is global. Being based in Wana reminds us to build inclusive, accessible, and practical tools — not just for elite labs, but for every researcher and freelancer in the world.
+
+FOUNDER:
+Nasir Khan — Founder, WanaLab
+Based in Wana, South Waziristan | Working Globally
+Email: nasir@wanalab.org (Verified)
+Google Scholar: Verified Researcher at wanalab.org
+ORCID: 0009-0002-6006-0796
+
+WanaLab is for you — wherever you are.
+`
+  },
+  privacy: {
+    title: "Privacy Policy - WanaLab",
+    content: `Effective Date: November 1, 2026
+Based in: Wana, South Waziristan, Pakistan
+Serves: Global researchers and freelancers worldwide
+
+At WanaLab.org, we respect your privacy.
+
+1. INFORMATION WE COLLECT:
+We collect minimal data. Only what you send us via nasir@wanalab.org or contact form to help with your research/freelance query. We do not sell, trade, or share your data. Ever.
+
+2. COOKIES:
+No advertising trackers. Only essential Cloudflare cookies for security and performance of wanalab.org. You can disable cookies in your browser.
+
+3. SERVICES WE USE:
+- Cloudflare Pages — global CDN and hosting
+- Zoho Mail — secure email (nasir@wanalab.org)
+- Google Scholar / ORCID — academic verification
+
+4. DATA FOR FREELANCERS/RESEARCHERS:
+Portfolios or research profiles shared with us are stored only with your permission.
+
+5. YOUR RIGHTS (GLOBAL):
+You can request deletion of your contact data anytime by emailing nasir@wanalab.org.
+
+Contact: nasir@wanalab.org — Wana, South Waziristan
+`
+  },
+  terms: {
+    title: "Terms of Service - WanaLab",
+    content: `Terms of Service — WanaLab.org
+Based in Wana, South Waziristan — Built for Global Researchers & Freelancers
+
+1. GLOBAL USE:
+WanaLab.org content is for researchers and freelancers worldwide, for educational and professional purposes. Free to use.
+
+2. BASED IN WANA:
+Operated from Wana, South Waziristan, Pakistan. Local laws of Pakistan apply, but we serve globally with open access principles.
+
+3. INTELLECTUAL PROPERTY:
+Original guides, templates, research content, and tools are © WanaLab, Wana. You may share with attribution to wanalab.org.
+
+4. NO GUARANTEE, REAL GUIDANCE:
+We share practical, tested methods for research and freelancing. Outcomes (earnings, publications) depend on your effort. Tools are provided as-is.
+
+5. FREE TOOLS:
+64+ tools are free. No login required. We do not store your uploaded images/files — processing happens in your browser.
+
+6. EXTERNAL LINKS:
+We link to Google Scholar, ORCID, Upwork, Fiverr, Aviasales, Booking.com etc. We are not responsible for their content/policies.
+
+7. CONTACT & GOVERNING PLACE:
+Operated from Wana, South Waziristan. Global inquiries welcome: nasir@wanalab.org
+`
+  },
+  contact: {
+    title: "Contact — WanaLab Global",
+    content: `We'd love to hear from you — whether you're a researcher, freelancer, or collaborator.
+
+Based in: Wana, South Waziristan, Pakistan
+Serving: Global community
+
+Email: nasir@wanalab.org (Verified at wanalab.org)
+ORCID: https://orcid.org/0009-0002-6006-0796
+Google Scholar: Verified at wanalab.org
+
+Response time: Usually within 24 hours.
+
+For collaboration, tool requests, research help, or affiliate partnerships — email us!
+`
+  }
+}
 
 const filtered = TOOLS.filter(t=>{
 const matchCat = cat==='All' || (cat==='Favorites' && fav.includes(t.name)) || (cat==='Recent' && recent.includes(t.name)) || t.cat===cat;
@@ -209,8 +332,9 @@ return(
 
 <header style={{position:'sticky',top:0,zIndex:20,background:'rgba(255,255,255,0.8)',backdropFilter:'blur(12px)',borderBottom:'1px solid #f1f5f9'}}>
 <div style={{maxWidth:1200,margin:'0 auto',padding:'14px 20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-<div style={{display:'flex',alignItems:'center',gap:10}}><div style={{width:32,height:32,borderRadius:8,background:'#0f172a',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:14}}>W</div><div><div style={{fontWeight:700,fontSize:15,lineHeight:'1'}}>WanaLab</div><div style={{fontSize:11,color:'#64748b'}}>Tools • Travel • Global</div></div></div>
+<div style={{display:'flex',alignItems:'center',gap:10}}><div style={{width:32,height:32,borderRadius:8,background:'#0f172a',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,fontSize:14}}>W</div><div><div style={{fontWeight:700,fontSize:15,lineHeight:'1'}}>WanaLab</div><div style={{fontSize:11,color:'#64748b'}}>Wana Based • Global Built</div></div></div>
 <div style={{display:'flex',gap:8,alignItems:'center'}}>
+<button onClick={()=>setShowPage('about')} style={{padding:'8px 14px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:13,fontWeight:500,cursor:'pointer'}}>About</button>
 <button onClick={()=>setShowTravel(true)} style={{padding:'8px 14px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:13,fontWeight:500,cursor:'pointer'}}>✈️ Travel</button>
 <button onClick={()=>setShowSport(true)} style={{padding:'8px 14px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:13,fontWeight:500,cursor:'pointer'}}>🏏 SportHub</button>
 <div style={{width:1,height:20,background:'#e2e8f0',margin:'0 4px'}}/>
@@ -220,38 +344,34 @@ return(
 </header>
 
 <div style={{maxWidth:1200,margin:'0 auto',padding:'32px 20px'}}>
-{/* HERO */}
 <div style={{textAlign:'center',maxWidth:640,margin:'0 auto 32px'}}>
-<h1 style={{fontSize:32,fontWeight:700,lineHeight:'1.15',margin:'0 0 12px',letterSpacing:'-0.02em'}}>Everything you need.<br/>All free tools in one place.</h1>
-<p style={{fontSize:15,color:'#64748b',margin:'0 0 20px',lineHeight:'1.5'}}>Image, text, developer and daily tools. With real Urdu اردو & Pashto پښتو translator, YouTube tools, and travel deals.</p>
+<h1 style={{fontSize:32,fontWeight:700,lineHeight:'1.15',margin:'0 0 12px',letterSpacing:'-0.02em'}}>Wana Based. Global Built.<br/>64+ free tools for researchers & freelancers.</h1>
+<p style={{fontSize:15,color:'#64748b',margin:'0 0 20px',lineHeight:'1.5'}}>Built in Wana, South Waziristan for the world. Image, text, dev tools + real Urdu اردو & Pashto پښتو translator.</p>
 <div style={{position:'relative',maxWidth:480,margin:'0 auto'}}>
-<input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search tools - e.g. translator, image, BMI, QR..." style={{width:'100%',padding:'14px 48px 14px 20px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:14,outline:'none',boxShadow:'0 1px 2px rgba(0,0,0,0.05)'}}/>
+<input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search tools - translator, image, BMI, QR..." style={{width:'100%',padding:'14px 48px 14px 20px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:14,outline:'none',boxShadow:'0 1px 2px rgba(0,0,0,0.05)'}}/>
 <div style={{position:'absolute',right:6,top:6,bottom:6,width:36,borderRadius:999,background:'#0f172a',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14}}>⌕</div>
 </div>
 <div style={{display:'flex',gap:8,justifyContent:'center',flexWrap:'wrap',marginTop:16}}>
 {['All','Featured','Image','Text','Dev','Daily','Favorites'].map(c=>(
-<button key={c} onClick={()=>setCat(c==='Favorites'?'Favorites':c)} style={{padding:'6px 14px',borderRadius:999,border: cat===c || (c==='Favorites'&&cat==='Favorites') ? '1px solid #0f172a':'1px solid #e2e8f0', background: cat===c || (c==='Favorites'&&cat==='Favorites') ? '#0f172a':'#fff', color: cat===c || (c==='Favorites'&&cat==='Favorites') ? '#fff':'#475569', fontSize:13,fontWeight:500,cursor:'pointer'}}>{c}</button>
+<button key={c} onClick={()=>setCat(c)} style={{padding:'6px 14px',borderRadius:999,border: cat===c ? '1px solid #0f172a':'1px solid #e2e8f0', background: cat===c ? '#0f172a':'#fff', color: cat===c ? '#fff':'#475569', fontSize:13,fontWeight:500,cursor:'pointer'}}>{c}</button>
 ))}
 </div>
 </div>
 
-{/* CLEAN TRAVEL BAR - Single, professional */}
 <div style={{background:'#fff',border:'1px solid #f1f5f9',borderRadius:16,padding:'14px 16px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12,marginBottom:24,boxShadow:'0 1px 2px rgba(0,0,0,0.03)'}}>
 <div style={{display:'flex',gap:12,alignItems:'center'}}>
 <div style={{fontSize:13,fontWeight:600}}>Travel deals</div>
 <div style={{display:'flex',gap:8}}>
 <a href={getAviaLink('NYC','LON')} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>✈️ Flights</a>
 <a href={getBookingLink('Dubai')} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>🏨 Hotels</a>
-<a href={getAirbnbLink('Dubai')} target="_blank" rel="noreferrer" style={{padding:'6px 12px',borderRadius:999,background:'#f8fafc',border:'1px solid #e2e8f0',fontSize:12,textDecoration:'none',color:'#0f172a'}}>🏠 Airbnb Stays</a>
 </div>
 </div>
 <div style={{display:'flex',gap:8,alignItems:'center'}}>
-<div style={{fontSize:11,color:'#64748b'}}>Best prices • Verified</div>
+<div style={{fontSize:11,color:'#64748b'}}>Based in Wana • Global deals</div>
 <button onClick={()=>setShowTravel(true)} style={{padding:'6px 12px',borderRadius:999,background:'#0f172a',color:'#fff',border:0,fontSize:12,fontWeight:500,cursor:'pointer'}}>View all →</button>
 </div>
 </div>
 
-{/* TOOLS GRID */}
 <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))',gap:14}}>
 {filtered.map(t=>(
 <div key={t.name} onClick={()=>openTool(t)} style={{background:'#fff',border:'1px solid #f1f5f9',borderRadius:16,padding:16,cursor:'pointer',transition:'all 0.15s',boxShadow:'0 1px 2px rgba(0,0,0,0.02)'}} onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 8px 24px rgba(0,0,0,0.06)'; e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.borderColor='#e2e8f0'}} onMouseLeave={e=>{e.currentTarget.style.boxShadow='0 1px 2px rgba(0,0,0,0.02)'; e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.borderColor='#f1f5f9'}}>
@@ -274,12 +394,18 @@ return(
 )}
 
 <div style={{marginTop:48,paddingTop:20,borderTop:'1px solid #f1f5f9',display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:12,fontSize:12,color:'#94a3b8'}}>
-<div>© 2026 WanaLab • Founder Nasir Khan • {TOOLS.length} tools • Real Urdu اردو Pashto پښتو • Built for speed</div>
-<div style={{display:'flex',gap:16}}><span>Privacy</span><span>Terms</span><span style={{color:'#0f172a',fontWeight:500}}>alab-web.pages.dev</span></div>
+<div>© 2026 WanaLab • Wana, South Waziristan • Global • {TOOLS.length} tools • Founder Nasir Khan</div>
+<div style={{display:'flex',gap:16}}>
+<button onClick={()=>setShowPage('about')} style={{background:'none',border:0,cursor:'pointer',fontSize:12,color:'#94a3b8'}}>About</button>
+<button onClick={()=>setShowPage('privacy')} style={{background:'none',border:0,cursor:'pointer',fontSize:12,color:'#94a3b8'}}>Privacy</button>
+<button onClick={()=>setShowPage('terms')} style={{background:'none',border:0,cursor:'pointer',fontSize:12,color:'#94a3b8'}}>Terms</button>
+<button onClick={()=>setShowPage('contact')} style={{background:'none',border:0,cursor:'pointer',fontSize:12,color:'#0f172a',fontWeight:500}}>Contact</button>
+</div>
 </div>
 </div>
 
 {activeTool && <ToolModal tool={activeTool} onClose={()=>setActiveTool(null)}/>}
+{showPage && <PageModal page={PAGES[showPage]} onClose={()=>setShowPage(null)}/>}
 {showTravel && (
 <div onClick={()=>setShowTravel(false)} style={{position:'fixed',inset:0,background:'rgba(15,23,42,0.5)',backdropFilter:'blur(8px)',zIndex:50,display:'flex',justifyContent:'center',alignItems:'center',padding:16}}>
 <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:20,padding:20,width:'100%',maxWidth:520,boxShadow:'0 25px 50px rgba(0,0,0,0.2)'}}>
@@ -287,8 +413,6 @@ return(
 <div style={{display:'flex',flexDirection:'column',gap:10}}>
 <a href={getAviaLink('NYC','LON')} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><div style={{fontWeight:600,fontSize:14}}>✈️ Flights - Cheapest tickets</div><div style={{fontSize:12,color:'#64748b'}}>Aviasales • Booking • Trip.com</div></div><div style={{fontSize:12,fontWeight:600,background:'#0f172a',color:'#fff',padding:'4px 10px',borderRadius:999}}>$5/ticket</div></a>
 <a href={getBookingLink('Dubai')} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><div style={{fontWeight:600,fontSize:14}}>🏨 Hotels - Booking.com</div><div style={{fontSize:12,color:'#64748b'}}>Global hotels • Verified</div></div><div style={{fontSize:12,fontWeight:600,background:'#0f172a',color:'#fff',padding:'4px 10px',borderRadius:999}}>40%</div></a>
-<a href={getAirbnbLink('Dubai')} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><div style={{fontWeight:600,fontSize:14}}>🏠 Airbnb Stays</div><div style={{fontSize:12,color:'#64748b'}}>Homes • Apartments • 11M searches/mo</div></div><div style={{fontSize:12,fontWeight:600,background:'#0f172a',color:'#fff',padding:'4px 10px',borderRadius:999}}>25%</div></a>
-<a href={`https://www.amazon.com/s?k=best+sellers&tag=${AFFILIATE.amazon_us}`} target="_blank" rel="noreferrer" style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'14px 16px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a'}}><div><div style={{fontWeight:600,fontSize:14}}>🛒 Amazon Shopping</div><div style={{fontSize:12,color:'#64748b'}}>Best sellers • Global</div></div><div style={{fontSize:12,fontWeight:600,background:'#f1f5f9',color:'#0f172a',padding:'4px 10px',borderRadius:999}}>4-10%</div></a>
 </div>
 <button onClick={()=>setShowTravel(false)} style={{marginTop:16,width:'100%',padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff',fontWeight:500,cursor:'pointer'}}>Close</button>
 </div>
@@ -302,7 +426,6 @@ return(
 <a href="https://www.espncricinfo.com/series/psl-2025-1496956" target="_blank" rel="noreferrer" style={{padding:'12px 14px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a',fontSize:14,fontWeight:500}}>PSL - Pakistan Super League →</a>
 <a href="https://www.iplt20.com" target="_blank" rel="noreferrer" style={{padding:'12px 14px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a',fontSize:14,fontWeight:500}}>IPL - Indian Premier League →</a>
 <a href="https://www.premierleague.com" target="_blank" rel="noreferrer" style={{padding:'12px 14px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a',fontSize:14,fontWeight:500}}>EPL - Premier League →</a>
-<a href="https://www.cricbuzz.com/cricket-match/live-scores" target="_blank" rel="noreferrer" style={{padding:'12px 14px',borderRadius:12,border:'1px solid #f1f5f9',background:'#fcfcfd',textDecoration:'none',color:'#0f172a',fontSize:14,fontWeight:500}}>Live Cricket Scores →</a>
 </div>
 <button onClick={()=>setShowSport(false)} style={{marginTop:16,width:'100%',padding:'12px',borderRadius:12,border:'1px solid #e2e8f0',background:'#fff',fontWeight:500,cursor:'pointer'}}>Close</button>
 </div>
