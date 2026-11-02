@@ -41,6 +41,18 @@ export default function About() {
             <p>ORCID: <a className="text-blue-600" href="https://orcid.org/0009-0002-6006-0796">0009-0002-6006-0796</a></p>
           </div>
         </div>
+
+        <h2 className="text-2xl font-semibold mt-10">Not Affiliated — Clarification</h2>
+        <div className="p-5 bg-blue-50 border border-blue-100 rounded-xl text-sm">
+          <p><strong>Is WanaLab related to Wanna Labs or Wanalab France?</strong></p>
+          <p className="mt-2">
+            No. WanaLab.org is independent.<br/>
+            • <strong>Wanna Labs</strong> is a fashion / streetwear apparel brand.<br/>
+            • <strong>Wanalab France</strong> is a home improvement brand.<br/>
+            • <strong>WanaLab.org (WanaLab)</strong> is a research & free tools platform from Wana, South Waziristan, Pakistan founded by Nasir.
+          </p>
+        </div>
+
         <p className="pt-4"><strong>WanaLab is for you — wherever you are.</strong> Contact: nasir@wanalab.org</p>
       </div>
     </div>
