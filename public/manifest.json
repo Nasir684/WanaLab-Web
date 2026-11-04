@@ -1,29 +1,71 @@
 {
-  "name": "WanaLab - Independent Research Lab, WANA",
+  "name": "WanaLab.org - Wana Based, Global Built - 64 Tools",
   "short_name": "WanaLab",
-  "description": "9 Offline Tools + Sports Hub PSL IPL EPL - No Upload, Private - Engineered in WANA",
-  "start_url": "https://wanalab-web.pages.dev/?source=pwa",
-  "scope": "https://wanalab-web.pages.dev/",
+  "description": "64 Free Tools from Wana, South Waziristan - Image to WebP, PDF, Stylish Name, Translator Urdu Pashto, Age Calculator - English اردو हिन्दी العربية - Founder Nasir Khan - No Upload, Private",
+  "start_url": "https://wanalab.org/?source=pwa",
+  "scope": "https://wanalab.org/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#000000",
+  "theme_color": "#4f46e5",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "https://wanalab-web.pages.dev/icon-192.png",
+      "src": "https://wanalab.org/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://wanalab-web.pages.dev/icon-512.png",
+      "src": "https://wanalab.org/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
   "shortcuts": [
-    { "name": "Age Prime", "url": "https://wanalab-web.pages.dev/age-prime", "icons": [{ "src": "https://wanalab-web.pages.dev/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Image Prime", "url": "https://wanalab-web.pages.dev/image-prime", "icons": [{ "src": "https://wanalab-web.pages.dev/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Sports Hub", "url": "https://wanalab-web.pages.dev/sports", "icons": [{ "src": "https://wanalab-web.pages.dev/icon-192.png", "sizes": "192x192" }] }
+    { 
+      "name": "Image to WebP - تصویر", 
+      "short_name": "WebP",
+      "description": "Convert image to WebP - تصویر کو WebP بنائیں",
+      "url": "https://wanalab.org/tools/image-to-webp", 
+      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+    },
+    { 
+      "name": "Stylish Name - سٹائلش نام", 
+      "short_name": "Stylish",
+      "description": "Stylish Name Generator - سٹائلش نام بنائیں",
+      "url": "https://wanalab.org/tools/stylish-name", 
+      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+    },
+    { 
+      "name": "Age Calculator - عمر کیلکولیٹر", 
+      "short_name": "Age",
+      "description": "Age Calculator - عمر کیلکولیٹر",
+      "url": "https://wanalab.org/tools/age-calculator", 
+      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+    },
+    { 
+      "name": "Urdu Pashto Translator", 
+      "short_name": "Translator",
+      "description": "Real Urdu Pashto Translator from Wana",
+      "url": "https://wanalab.org/tools/translator-urdu-pashto", 
+      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+    },
+    { 
+      "name": "QR Generator - QR کوڈ", 
+      "short_name": "QR",
+      "description": "QR Code Generator",
+      "url": "https://wanalab.org/tools/qr-code-generator", 
+      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+    }
+  ],
+  "categories": ["productivity", "utilities", "education"],
+  "screenshots": [
+    {
+      "src": "https://wanalab.org/og-image.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
   ]
 }
