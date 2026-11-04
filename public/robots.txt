@@ -1,4 +1,43 @@
 User-agent: *
 Allow: /
 
+# Allow all 64 tools
+Allow: /tools/
+Allow: /tools/image-to-webp
+Allow: /tools/stylish-name
+Allow: /tools/age-calculator
+Allow: /tools/translator-urdu-pashto
+
+# Block private / build files
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /*.json$
+Disallow: /package-lock.json
+
+# Allow SEO bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Adsense
+Allow: /
+
+# For AI crawlers - Important for WanaLab
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap - 64 tools
 Sitemap: https://wanalab.org/sitemap.xml
+
+# Host
+Host: https://wanalab.org
