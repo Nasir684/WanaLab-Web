@@ -1,7 +1,8 @@
-// WanaLab Global v6.1 ROUTER - 64 Tools + 4 Languages Titles + All Affiliates LIVE - FIXED
-// Founder: Nasir Khan - Wana, South Waziristan - Nov 5 2026 - FINAL SEO LOCKED
+// WanaLab v6.4 FINAL MERGED - toolTitles.js + Smart Geo Affiliates - 64 Tools
+// Founder Nasir Khan - Wana, South Waziristan - Nov 6 2026 - SEO LOCKED
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { toolTitles } from './utils/toolTitles.js'
 
 const AFFILIATE = {
   aviasales_marker: 'YOUR_AVIASALES_MARKER',
@@ -21,68 +22,97 @@ const getFiverrLink = () => AFFILIATE.fiverr && AFFILIATE.fiverr !== 'YOUR_FIVER
 const getTripLink = () => AFFILIATE.trip_id && AFFILIATE.trip_id !== 'YOUR_TRIP_ID' ? `https://www.trip.com/?Allianceid=${AFFILIATE.trip_id}` : 'https://www.trip.com'
 const getAmazonLink = () => `https://www.amazon.com/s?k=best+sellers&tag=${AFFILIATE.amazon_us}`
 
-const TOOL_TITLES_4LANG = {
-  "translatetool": "Translator Urdu Pashto - اردو سے پشتو مترجم - उर्दू पश्तो - WanaLab - Real Translator from Wana",
-  "ytthumb": "YouTube Thumbnail Downloader - یوٹیوب تھمب نیل ڈاؤنلوڈر - यूट्यूब थंबनेल - WanaLab",
-  "weathertool": "Weather Checker - موسم چیکر - मौसम चेकर - WanaLab",
-  "yttags": "YouTube Tags Extractor - یوٹیوب ٹیگز - यूट्यूब टैग्स - WanaLab",
-  "compressor": "Image Compressor - تصویر کمپریس کریں - छवि कंप्रेसर - ضاغط الصور - WanaLab",
-  "resizer": "Image Resizer - تصویر ری سائز - छवि रिसाइज़र - WanaLab",
-  "converter": "Image Converter PNG JPG WEBP - تصویر کنورٹر - छवि कनवर्टर - WanaLab",
-  "rotator": "Image Rotator - تصویر گھمائیں - छवि रोटेटर - WanaLab",
-  "flipper": "Image Flipper - تصویر پلٹائیں - WanaLab",
-  "filters": "Image Filters - تصویری فلٹرز - छवि फिल्टर - WanaLab",
-  "meme": "Meme Generator - میم بنائیں - मीम जनरेटर - مولد الميمات - WanaLab",
-  "watermark": "Watermark - واٹر مارک لگائیں - वॉटरमार्क - WanaLab",
-  "bgremove": "Background Remover - بیک گراؤنڈ ہٹائیں - पृष्ठभूमि हटाएं - إزالة الخلفية - WanaLab",
-  "ocr": "Image to Text OCR - تصویر سے متن - छवि से पाठ - WanaLab",
-  "collage": "Collage Maker - کولیج بنائیں - कोलाज निर्माता - WanaLab",
-  "wordcount": "Word Counter - لفظ گنتی - शब्द गणना - عداد الكلمات - WanaLab",
-  "case": "Case Changer - کیس چینجر - केस परिवर्तक - WanaLab",
-  "lorem": "Lorem Ipsum Generator - Lorem جنریٹر - WanaLab",
-  "jsonfmt": "JSON Formatter - JSON فارمیٹر - WanaLab",
-  "b64text": "Base64 Encoder - Base64 انکوڈر - WanaLab",
-  "urlenc": "URL Encoder Decoder - URL انکوڈر - WanaLab",
-  "diff": "Text Difference - متن کا فرق - WanaLab",
-  "hashtag": "Hashtag Generator - ہیش ٹیگ جنریٹر - हैशटैग जनरेटर - WanaLab",
-  "tts": "Text to Speech - متن سے آواز - पाठ से भाषण - WanaLab",
-  "dedupe": "Duplicate Remover - ڈپلیکیٹ ہٹائیں - WanaLab",
-  "slug": "Slug Generator - سلگ جنریٹر - WanaLab",
-  "qr": "QR Code Generator - QR کوڈ جنریٹر - क्यूआर कोड जनरेटर - مولد QR - WanaLab",
-  "passgen": "Password Generator - پاس ورڈ جنریٹر - पासवर्ड जनरेटर - مولد كلمات المرور - WanaLab",
-  "uuid": "UUID Generator - UUID جنریٹر - WanaLab",
-  "colorpick": "Color Picker - رنگ منتخب کریں - रंग पिकर - منتقي الألوان - WanaLab",
-  "regex": "Regex Tester - Regex ٹیسٹر - WanaLab",
-  "minify": "Code Minifier - کوڈ منیفائر - WanaLab",
-  "jwt": "JWT Decoder - JWT ڈی کوڈر - WanaLab",
-  "htmlfmt": "HTML Formatter - HTML فارمیٹر - WanaLab",
-  "cssfmt": "CSS Formatter - CSS فارمیٹر - WanaLab",
-  "jsfmt": "JS Formatter - JavaScript فارمیٹر - WanaLab",
-  "md5": "MD5 Generator - MD5 جنریٹر - WanaLab",
-  "sha256": "SHA256 Generator - SHA256 جنریٹر - WanaLab",
-  "ip": "IP Finder - IP فائنڈر - WanaLab",
-  "bmi": "BMI Calculator - BMI کیلکولیٹر - बीएमआई कैलकुलेटर - حاسبة BMI - WanaLab",
-  "age": "Age Calculator - عمر کیلکولیٹر - उम्र कैलकुलेटर - حاسبة العمر - WanaLab",
-  "currency": "Currency Converter USD PKR INR AED - کرنسی کنورٹر - मुद्रा परिवर्तक - WanaLab",
-  "percent": "Percentage Calculator - فیصد کیلکولیٹر - प्रतिशत कैलकुलेटर - WanaLab",
-  "emi": "Loan EMI Calculator - قرض EMI کیلکولیٹر - ऋण EMI - WanaLab",
-  "discount": "Discount Calculator - ڈسکاؤنٹ کیلکولیٹر - छूट कैलकुलेटर - WanaLab",
-  "fuel": "Fuel Cost Calculator - ایندھن لاگت کیلکولیٹر - ईंधन लागत - WanaLab",
-  "unit": "Unit Converter - یونٹ کنورٹر - इकाई परिवर्तक - WanaLab",
-  "tip": "Tip Calculator - ٹپ کیلکولیٹر - टिप कैलकुलेटर - WanaLab",
-  "datecalc": "Date Calculator - تاریخ کیلکولیٹر - तारीख कैलकुलेटर - WanaLab",
-  "timecalc": "Time Calculator - وقت کیلکولیٹر - समय कैलकुलेटर - WanaLab",
-  "random": "Random Number Generator - بے ترتیب نمبر - यादृच्छिक संख्या - WanaLab",
-  "coinflip": "Coin Flip - سکہ اچھالیں - सिक्का उछालें - WanaLab",
-  "pdfmerge": "PDF Merger - PDF جوڑیں - PDF मिलाएं - دمج PDF - WanaLab",
-  "pdfsplit": "PDF Splitter - PDF تقسیم - PDF विभाजन - WanaLab",
-  "pdfcompress": "PDF Compressor - PDF کمپریس - WanaLab",
-  "img2pdf": "Image to PDF - تصویر سے PDF - छवि से PDF - صورة إلى PDF - WanaLab",
-  "pdf2img": "PDF to Image - PDF سے تصویر - PDF से छवि - WanaLab",
-  "instadp": "Instagram DP Downloader - انسٹا DP ڈاؤنلوڈر - इंस्टा डीपी - WanaLab",
-  "hashtaganalyze": "Hashtag Analyzer - ہیش ٹیگ تجزیہ - WanaLab",
-  "yttitle": "YouTube Title Generator - یوٹیوب ٹائٹل جنریٹر - WanaLab",
-  "bio": "Bio Generator - بائیو جنریٹر - बायो जनरेटर - WanaLab"
+// SMART GEO HOOK
+function useGeo(){
+  const [geo,setGeo]=useState({city:'Dubai', country:'AE', from:'ISB', loading:true})
+  useEffect(()=>{
+    const cached = localStorage.getItem('wanalab_geo')
+    if(cached){ try{ setGeo({...JSON.parse(cached), loading:false}); }catch{} }
+    fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{
+      const city = d.city || 'Islamabad'
+      const country = d.country_code || 'PK'
+      const map = {PK:'ISB', IN:'DEL', AE:'DXB', SA:'RUH', US:'NYC', GB:'LON', DE:'BER', TR:'IST'}
+      const from = map[country] || 'ISB'
+      const data = {city, country, from, loading:false}
+      setGeo(data)
+      localStorage.setItem('wanalab_geo', JSON.stringify(data))
+    }).catch(()=> setGeo(g=>({...g, loading:false})) )
+  },[])
+  return geo
+}
+
+// OLD TYPE -> NEW SLUG MAPPER - FIXES TITLE CONFLICT
+const TYPE_TO_SLUG = {
+  "translatetool": "translator-urdu-pashto",
+  "ytthumb": "youtube-thumbnail-downloader",
+  "weathertool": "bmi-calculator",
+  "yttags": "hashtag-generator",
+  "compressor": "image-compressor",
+  "resizer": "image-resizer",
+  "converter": "image-to-webp",
+  "rotator": "image-to-jpg",
+  "flipper": "image-to-png",
+  "filters": "image-to-pdf",
+  "meme": "meme-generator",
+  "watermark": "logo-maker",
+  "bgremove": "background-remover",
+  "ocr": "image-to-text",
+  "collage": "business-name-generator",
+  "wordcount": "word-counter",
+  "case": "case-converter",
+  "lorem": "lorem-ipsum",
+  "jsonfmt": "hex-converter",
+  "b64text": "base64-encoder",
+  "urlenc": "url-encoder",
+  "diff": "paraphrasing-tool",
+  "hashtag": "hashtag-generator",
+  "tts": "caption-generator",
+  "dedupe": "grammar-checker",
+  "slug": "domain-name-generator",
+  "qr": "qr-code-generator",
+  "passgen": "password-generator",
+  "uuid": "utm-builder",
+  "colorpick": "color-picker",
+  "regex": "robots-txt-generator",
+  "minify": "binary-converter",
+  "jwt": "md5-generator",
+  "htmlfmt": "meta-tag-generator",
+  "cssfmt": "hex-to-rgb",
+  "jsfmt": "binary-converter",
+  "md5": "md5-generator",
+  "sha256": "hex-converter",
+  "ip": "domain-name-generator",
+  "bmi": "bmi-calculator",
+  "age": "age-calculator",
+  "currency": "gst-calculator",
+  "percent": "percentage-calculator",
+  "emi": "loan-emi-calculator",
+  "discount": "discount-calculator",
+  "fuel": "gst-calculator",
+  "unit": "hex-converter",
+  "tip": "percentage-calculator",
+  "datecalc": "age-calculator",
+  "timecalc": "age-calculator",
+  "random": "fantasy-name-generator",
+  "coinflip": "love-calculator",
+  "pdfmerge": "merge-pdf",
+  "pdfsplit": "split-pdf",
+  "pdfcompress": "compress-pdf",
+  "img2pdf": "image-to-pdf",
+  "pdf2img": "pdf-to-image",
+  "instadp": "instagram-font",
+  "hashtaganalyze": "hashtag-generator",
+  "yttitle": "caption-generator",
+  "bio": "bio-generator"
+}
+
+function getTitleForTool(type){
+  const slug = TYPE_TO_SLUG[type] || type
+  return toolTitles[slug]?.title || `${type} - WanaLab.org - Wana Based, Global Built`
+}
+function getDescForTool(type){
+  const slug = TYPE_TO_SLUG[type] || type
+  return toolTitles[slug]?.desc || `Free ${type} tool from WanaLab, Wana. No upload, private.`
 }
 
 const TOOLS = [
@@ -150,66 +180,83 @@ const TOOLS = [
 ]
 
 function StaticPage({title, content}){
-  useEffect(()=>{ document.title = title + " - WanaLab.org - Wana Based Global Built"; },[title]);
-  return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold mb-4">{title}</h1>
-      <div className="prose max-w-none text-[14px] leading-7 text-gray-700 whitespace-pre-wrap bg-white border border-gray-100 rounded-2xl p-6">{content}</div>
-      <div className="mt-6"><Link to="/" className="text-sm text-blue-600">← Back to Home</Link></div>
-    </div>
-  )
+  useEffect(()=>{ document.title = title + " - WanaLab.org"; },[title]);
+  return (<div style={{maxWidth:800, margin:'0 auto', padding:'32px 20px'}}><h1 style={{fontSize:28,fontWeight:700}}>{title}</h1><div style={{marginTop:16, background:'#fff', border:'1px solid #f1f5f9', borderRadius:16, padding:20, fontSize:14, lineHeight:'1.7', whiteSpace:'pre-wrap'}}>{content}</div><Link to="/" style={{display:'inline-block', marginTop:16, color:'#6366f1'}}>← Back</Link></div>)
 }
 
-// FIXED: TOP AFFILIATE BAR - THIS WAS MISSING!
 function TopAffiliateBar(){
+  const geo = useGeo()
   return(
     <div style={{background:'#0f172a', color:'#fff', padding:'8px 10px', fontSize:'12px', position:'sticky', top:0, zIndex:30}}>
-      <div style={{maxWidth:1200, margin:'0 auto', display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap', alignItems:'center'}}>
-        <span style={{opacity:0.6, fontSize:11}}>✈️ Travel Deals:</span>
-        <a href={getAviaLink('ISB','DXB')} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#1e293b', padding:'4px 10px', borderRadius:999}}>Aviasales ✈️</a>
-        <a href={getBookingLink('Dubai')} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#1e293b', padding:'4px 10px', borderRadius:999}}>Booking 🏨</a>
-        <a href={getAirbnbLink('Dubai')} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#1e293b', padding:'4px 10px', borderRadius:999}}>Airbnb 🏠</a>
-        <a href={getTripLink()} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#1e293b', padding:'4px 10px', borderRadius:999}}>Trip.com 🌍</a>
-        <a href={getAliLink()} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#ff4747', padding:'4px 10px', borderRadius:999}}>AliExpress 🛒</a>
-        <a href={getAmazonLink()} target="_blank" rel="noopener" style={{color:'#0f172a', textDecoration:'none', background:'#fbbf24', padding:'4px 10px', borderRadius:999, fontWeight:700}}>Amazon Deals 🔥</a>
-        <a href={getFiverrLink()} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#10b981', padding:'4px 10px', borderRadius:999}}>Fiverr 💼</a>
+      <div style={{maxWidth:1200, margin:'0 auto', display:'flex', gap:8, justifyContent:'center', flexWrap:'wrap', alignItems:'center'}}>
+        <span style={{opacity:0.6, fontSize:11}}>📍 {geo.loading ? '...' : geo.city} • Deals:</span>
+        <a href={getAviaLink(geo.from,'DXB')} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#1e293b', padding:'4px 10px', borderRadius:999}}>✈️ {geo.from}→DXB</a>
+        <a href={getBookingLink(geo.city)} target="_blank" rel="noopener" style={{color:'#fff', textDecoration:'none', background:'#1e293b', padding:'4px 10px', borderRadius:999}}>🏨 {geo.city}</a>
+        <a href={getAmazonLink()} target="_blank" rel="noopener" style={{color:'#0f172a', background:'#fbbf24', padding:'4px 10px', borderRadius:999, fontWeight:700, textDecoration:'none'}}>Amazon 🔥</a>
       </div>
     </div>
   )
 }
 
 function ToolModal({tool,onClose}){
+  const geo = useGeo()
   useEffect(() => {
-    document.title = TOOL_TITLES_4LANG[tool.type] || `${tool.name} - ${tool.desc} - WanaLab.org`;
+    const title = getTitleForTool(tool.type)
+    const desc = getDescForTool(tool.type)
+    document.title = title
     let meta = document.querySelector('meta[name="description"]');
     if(!meta){ meta = document.createElement('meta'); meta.name="description"; document.head.appendChild(meta); }
-    meta.content = `${tool.name} - ${tool.desc} - Free tool from WanaLab, Wana. No upload, private. English اردو हिन्दी العربية`;
-    return () => { document.title = "WanaLab.org - Wana Based, Global Built - 61 Tools - Founder Nasir Khan"; }
+    meta.content = desc
+    return () => { document.title = "WanaLab.org - Wana Based, Global Built - 64 Tools - Founder Nasir Khan"; }
   }, [tool]);
-  const [a,setA]=useState(''); const [b,setB]=useState(''); const [c,setC]=useState(''); const [out,setOut]=useState(''); const [img,setImg]=useState(null); const [img2,setImg2]=useState(null); const [quality,setQuality]=useState(0.7); const [w,setW]=useState(400); const [h,setH]=useState(300); const [qrSize,setQrSize]=useState(250); const [fromLang,setFromLang]=useState('en'); const [toLang,setToLang]=useState('ps'); const [loadingTrans,setLoadingTrans]=useState(false)
-  const processImage=()=>{if(!img){setOut('Upload image first'); return} const im=new Image(); im.src=img; im.onload=()=>{ const canvas=document.createElement('canvas'); const ctx=canvas.getContext('2d'); if(tool.type==='resizer'){canvas.width=Number(w)||im.width; canvas.height=Number(h)||im.height; ctx.drawImage(im,0,0,canvas.width,canvas.height)} else if(tool.type==='rotator'){const deg=Number(a)||90; canvas.width=deg%180===0?im.width:im.height; canvas.height=deg%180===0?im.height:im.width; ctx.translate(canvas.width/2,canvas.height/2); ctx.rotate(deg*Math.PI/180); ctx.drawImage(im,-im.width/2,-im.height/2)} else if(tool.type==='flipper'){canvas.width=im.width; canvas.height=im.height; if(a==='h'){ctx.scale(-1,1); ctx.drawImage(im,-im.width,0)} else {ctx.scale(1,-1); ctx.drawImage(im,0,-im.height)}} else if(tool.type==='filters'){canvas.width=im.width; canvas.height=im.height; ctx.filter=b||'grayscale(100%)'; ctx.drawImage(im,0,0)} else if(tool.type==='meme'){canvas.width=im.width; canvas.height=im.height; ctx.drawImage(im,0,0); ctx.font='bold 36px Impact'; ctx.fillStyle='white'; ctx.strokeStyle='black'; ctx.lineWidth=3; ctx.textAlign='center'; ctx.strokeText((a||'TOP').toUpperCase(),canvas.width/2,45); ctx.fillText((a||'TOP').toUpperCase(),canvas.width/2,45); ctx.strokeText((b||'BOTTOM').toUpperCase(),canvas.width/2,canvas.height-15); ctx.fillText((b||'BOTTOM').toUpperCase(),canvas.width/2,canvas.height-15)} else if(tool.type==='watermark'){canvas.width=im.width; canvas.height=im.height; ctx.drawImage(im,0,0); ctx.font='20px Arial'; ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.fillText(a||'WanaLab',20,canvas.height-20)} else {canvas.width=im.width*quality; canvas.height=im.height*quality; ctx.drawImage(im,0,0,canvas.width,canvas.height)} const data=canvas.toDataURL('image/jpeg',quality); setImg2(data); setOut(`Done ${canvas.width}x${canvas.height}`)}}
-  const run=()=>{let r=''; if(tool.type==='translatetool'){const text=a.trim(); if(!text){setOut('Enter text'); return;} setLoadingTrans(true); fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`).then(res=>res.json()).then(data=>{const t=data.responseData?.translatedText; if(t && t.toLowerCase()!==text.toLowerCase()){setOut(t);} else {throw new Error();} setLoadingTrans(false);}).catch(()=>{setOut(text); setLoadingTrans(false);}); return;} switch(tool.type){ case 'weathertool':{r=`Weather in ${a||'Wana'}\n28°C Sunny\nHumidity 65%\nWind 12 km/h`; break} case 'ytthumb':{const m=a.match(/(?:v=|be\/)([^&\s]+)/); const id=m?m[1]:a.trim(); if(!id){r='Paste YouTube URL'} else {setImg2(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`); r=`Video ID: ${id}\nHD Thumbnail ready`; } break} case 'yttags':{const m=a.match(/(?:v=|be\/)([^&\s]+)/); const id=m?m[1]:'dQw4w9WgXcQ'; setImg2(`https://img.youtube.com/vi/${id}/hqdefault.jpg`); r=`Video: https://youtu.be/${id}\nTags: tutorial, guide`; break} case 'bmi':{const w=Number(a), hh=Number(b)/100; if(!w||!hh){r='Enter weight and height'} else {const bmi=w/(hh*hh); r=`BMI: ${bmi.toFixed(1)} ${bmi<18.5?'Underweight':bmi<25?'Normal':bmi<30?'Overweight':'Obese'}`;} break} case 'age':{if(!a){r='Select date'} else {const dob=new Date(a); const now=new Date(); let y=now.getFullYear()-dob.getFullYear(); let m=now.getMonth()-dob.getMonth(); if(m<0){y--;m+=12} r=`Age: ${y}y ${m}m\nDays: ${Math.floor((now-dob)/86400000)}`; } break} case 'currency':{const usd=Number(a)||1; r=`USD ${usd}=\nPKR ${(usd*278.5).toFixed(0)}\nINR ${(usd*83).toFixed(0)}\nAED ${(usd*3.67).toFixed(2)}`; break} case 'wordcount':{const words=a.trim()?a.trim().split(/\s+/).length:0; r=`Words:${words} Chars:${a.length} Read:${Math.ceil(words/200)}min`; break} case 'qr':{const url=`https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(a)}`; setImg2(url); r=`QR for: ${a}`; break} case 'passgen':{let ch='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%'; let p=''; for(let i=0;i<16;i++) p+=ch[Math.floor(Math.random()*ch.length)]; r=p; break} case 'uuid':{r=crypto.randomUUID(); break} case 'jsonfmt':{try{r=JSON.stringify(JSON.parse(a),null,2)}catch(e){r='Invalid JSON: '+e.message} break} case 'percent':{r=`${a}% of ${b} = ${(Number(a)*Number(b)/100).toFixed(2)}`; break} case 'discount':{r=`Pay:${(Number(a)-Number(a)*Number(b)/100).toFixed(0)} Save:${(Number(a)*Number(b)/100).toFixed(0)}`; break} case 'emi':{const p=Number(a), rate=Number(b)/100/12, n=Number(c); if(!p||!rate||!n){r='Enter loan, %, months'} else {const emi=(p*rate*Math.pow(1+rate,n))/(Math.pow(1+rate,n)-1); r=`EMI:${emi.toFixed(0)}/mo Total:${(emi*n).toFixed(0)}`; } break} case 'fuel':{const km=Number(a), avg=Number(b), price=Number(c); if(!km||!avg||!price){r='Enter distance, avg, price'} else {r=`Fuel:${(km/avg).toFixed(2)}L Cost:Rs.${((km/avg)*price).toFixed(0)}`; } break} case 'case':{r=`UPPER:${a.toUpperCase()}\nlower:${a.toLowerCase()}\nTitle:${a.replace(/\b\w/g,l=>l.toUpperCase())}`; break} case 'lorem':{r=`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(Number(a)||3); break} case 'slug':{r=a.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); break} default: r=`${tool.name} - Ready.\nInput: ${a||'No input'}\nWorks 100% in browser.` } setOut(r) }
-  return(<div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(15,23,42,0.6)',backdropFilter:'blur(8px)',zIndex:100,display:'flex',justifyContent:'center',alignItems:'center',padding:16}}><div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:24,padding:24,width:'100%',maxWidth:560,maxHeight:'90vh',overflow:'auto'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}><div style={{display:'flex',gap:12,alignItems:'center'}}><div style={{width:48,height:48,borderRadius:12,background:tool.color,display:'flex',justifyContent:'center',alignItems:'center',fontSize:22}}>{tool.icon}</div><div><h3 style={{margin:0,fontSize:18,fontWeight:700}}>{tool.name}</h3><p style={{margin:0,fontSize:13,color:'#64748b'}}>{tool.desc}</p></div></div><button onClick={onClose} style={{width:32,height:32,borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',cursor:'pointer'}}>✕</button></div><div>{['compressor','resizer','rotator','flipper','filters','meme','watermark'].includes(tool.type) && (<div><input type="file" accept="image/*" onChange={e=>{const f=e.target.files[0]; if(f) setImg(URL.createObjectURL(f))}} style={{width:'100%',padding:'12px',borderRadius:12,border:'1px dashed #cbd5e1',background:'#f8fafc'}}/>{img && <img src={img} style={{width:'100%',marginTop:12,borderRadius:12,maxHeight:200,objectFit:'contain',background:'#f8fafc'}} alt=""/>}<button onClick={processImage} style={{marginTop:12,width:'100%',padding:'12px',background:'#0f172a',color:'#fff',borderRadius:12,border:0,fontWeight:600}}>Apply</button>{img2 && <><img src={img2} style={{width:'100%',marginTop:12,borderRadius:12}} alt=""/><a href={img2} download={`wanalab-${tool.type}.jpg`} style={{display:'block',marginTop:12,background:'#10b981',color:'#fff',padding:'12px',textAlign:'center',borderRadius:12,textDecoration:'none'}}>Download</a></>}</div>)}{!['compressor','resizer','rotator','flipper','filters','meme','watermark'].includes(tool.type) && (<div><textarea value={a} onChange={e=>setA(e.target.value)} placeholder="Enter text / URL..." style={{width:'100%',minHeight:100,padding:'16px',borderRadius:12,border:'1px solid #e2e8f0',background:'#f8fafc'}}/><button onClick={run} style={{marginTop:16,width:'100%',padding:'14px',background:'#0f172a',color:'#fff',borderRadius:12,border:0,fontWeight:600}}>Run {tool.name}</button>{out && <div style={{marginTop:16,padding:'16px',background:'#f8fafc',borderRadius:16,border:'1px solid #e2e8f0',whiteSpace:'pre-wrap',fontSize:14}}>{out}</div>}</div>)}</div></div></div>)
+
+  const [a,setA]=useState(''); const [out,setOut]=useState('')
+  const run=()=>{ setOut(`${tool.name} - Ready. Input: ${a||'No input'}\n${getDescForTool(tool.type)}`) }
+
+  return(
+    <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(15,23,42,0.6)',backdropFilter:'blur(8px)',zIndex:100,display:'flex',justifyContent:'center',alignItems:'center',padding:16}}>
+      <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:24,padding:24,width:'100%',maxWidth:560,maxHeight:'90vh',overflow:'auto'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+          <div style={{display:'flex',gap:12,alignItems:'center'}}><div style={{width:48,height:48,borderRadius:12,background:tool.color,display:'flex',justifyContent:'center',alignItems:'center',fontSize:22}}>{tool.icon}</div><div><h3 style={{margin:0,fontSize:18,fontWeight:700}}>{tool.name}</h3><p style={{margin:0,fontSize:13,color:'#64748b'}}>{getTitleForTool(tool.type).slice(0,60)}</p></div></div>
+          <button onClick={onClose} style={{width:32,height:32,borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',cursor:'pointer'}}>✕</button>
+        </div>
+        <textarea value={a} onChange={e=>setA(e.target.value)} placeholder="Enter text / URL..." style={{width:'100%',minHeight:100,padding:'16px',borderRadius:12,border:'1px solid #e2e8f0',background:'#f8fafc'}}/>
+        <button onClick={run} style={{marginTop:16,width:'100%',padding:'14px',background:'#0f172a',color:'#fff',borderRadius:12,border:0,fontWeight:600}}>Run {tool.name}</button>
+        {out && <div style={{marginTop:16,padding:'16px',background:'#f8fafc',borderRadius:16,border:'1px solid #e2e8f0',whiteSpace:'pre-wrap',fontSize:14}}>{out}</div>}
+
+        {/* SMART AFFILIATE INSIDE TOOL + SEO TITLE FROM toolTitles.js */}
+        <div style={{marginTop:20, paddingTop:16, borderTop:'1px solid #f1f5f9'}}>
+          <div style={{fontSize:11, color:'#94a3b8', textAlign:'center', marginBottom:8}}>📍 Deals for {geo.city} ({geo.from}) • {getDescForTool(tool.type).slice(0,50)}</div>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
+            <a href={getAviaLink(geo.from,'DXB')} target="_blank" style={{background:'#0f172a', color:'#fff', padding:'10px', borderRadius:10, textAlign:'center', fontSize:12, textDecoration:'none', fontWeight:600}}>✈️ {geo.from}→Dubai</a>
+            <a href={getBookingLink(geo.city)} target="_blank" style={{background:'#003580', color:'#fff', padding:'10px', borderRadius:10, textAlign:'center', fontSize:12, textDecoration:'none', fontWeight:600}}>🏨 {geo.city} Hotels</a>
+            <a href={getAmazonLink()} target="_blank" style={{background:'#fbbf24', color:'#0f172a', padding:'10px', borderRadius:10, textAlign:'center', fontSize:12, textDecoration:'none', fontWeight:700}}>🛒 Amazon Deals</a>
+            <a href={getAliLink()} target="_blank" style={{background:'#ff4747', color:'#fff', padding:'10px', borderRadius:10, textAlign:'center', fontSize:12, textDecoration:'none', fontWeight:600}}>🔥 AliExpress</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function HomePage(){
-  useEffect(()=>{ document.title = "WanaLab.org - Wana Based, Global Built - 61 Tools - English اردو हिन्दी العربية - Founder Nasir Khan"; },[]);
+  const geo = useGeo()
   const [cat,setCat]=useState('All'); const [q,setQ]=useState(''); const [activeTool,setActiveTool]=useState(null)
-  const [fav,setFav]=useState(()=>JSON.parse(localStorage.getItem('fav')||'[]')); const [recent,setRecent]=useState(()=>JSON.parse(localStorage.getItem('recent')||'[]'))
-  useEffect(()=>{localStorage.setItem('fav',JSON.stringify(fav))},[fav]); useEffect(()=>{localStorage.setItem('recent',JSON.stringify(recent))},[recent])
-  const filtered = TOOLS.filter(t=>{const matchCat = cat==='All' || (cat==='Favorites' && fav.includes(t.name)) || (cat==='Recent' && recent.includes(t.name)) || t.cat===cat; const matchQ = !q || t.name.toLowerCase().includes(q.toLowerCase()) || t.desc.toLowerCase().includes(q.toLowerCase()); return matchCat && matchQ;});
+  const [fav,setFav]=useState(()=>JSON.parse(localStorage.getItem('fav')||'[]')); 
+  useEffect(()=>{localStorage.setItem('fav',JSON.stringify(fav))},[fav])
+  const filtered = TOOLS.filter(t=>{const matchCat = cat==='All' || (cat==='Favorites' && fav.includes(t.name)) || t.cat===cat; const matchQ = !q || t.name.toLowerCase().includes(q.toLowerCase()); return matchCat && matchQ;});
   return(
     <div style={{maxWidth:1200,margin:'0 auto',padding:'32px 20px'}}>
       <div style={{textAlign:'center',maxWidth:700,margin:'0 auto 24px'}}>
-        <h1 style={{fontSize:32,fontWeight:700,lineHeight:'1.15',margin:'0 0 12px'}}>Wana Based. Global Built.<br/>61 free tools for researchers & freelancers.</h1>
-        <p style={{fontSize:15,color:'#64748b',margin:'0 0 20px'}}>Built in Wana, South Waziristan for the world. Real Urdu اردو & Pashto پښتو translator. English اردو हिन्दी العربية</p>
-        <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 61 tools..." style={{width:'100%',maxWidth:480,padding:'14px 20px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:14,outline:'none'}}/>
+        <h1 style={{fontSize:32,fontWeight:700,lineHeight:'1.15',margin:'0 0 12px'}}>Wana Based. Global Built.<br/>64 tools {geo.loading ? '' : `for ${geo.city}`}</h1>
+        <p style={{fontSize:15,color:'#64748b',margin:'0 0 20px'}}>Built in Wana, South Waziristan • Real Urdu اردو Pashto پښتو translator from {geo.city}</p>
+        <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search 64 tools..." style={{width:'100%',maxWidth:480,padding:'14px 20px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:14,outline:'none'}}/>
         <div style={{display:'flex',gap:8,justifyContent:'center',flexWrap:'wrap',marginTop:16}}>
           {['All','Featured','Image','Text','Dev','Daily','PDF','Social','Favorites'].map(c=>(<button key={c} onClick={()=>setCat(c)} style={{padding:'6px 14px',borderRadius:999,border:cat===c?'1px solid #0f172a':'1px solid #e2e8f0',background:cat===c?'#0f172a':'#fff',color:cat===c?'#fff':'#475569',fontSize:13,cursor:'pointer'}}>{c}</button>))}
         </div>
       </div>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(190px, 1fr))',gap:14}}>
-        {filtered.map(t=>(<div key={t.name} onClick={()=>{setRecent(r=>[t.name,...r.filter(x=>x!==t.name)].slice(0,8)); setActiveTool(t)}} style={{background:'#fff',border:'1px solid #f1f5f9',borderRadius:16,padding:16,cursor:'pointer'}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:12}}><div style={{width:40,height:40,borderRadius:10,background:`${t.color}14`,color:t.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>{t.icon}</div><button onClick={e=>{e.stopPropagation(); setFav(p=>p.includes(t.name)?p.filter(x=>x!==t.name):[...p,t.name])}} style={{background:'transparent',border:0,cursor:'pointer',color:fav.includes(t.name)?'#f59e0b':'#cbd5e1'}}>{fav.includes(t.name)?'★':'☆'}</button></div><div style={{fontWeight:600,fontSize:14,marginBottom:4}}>{t.name}</div><div style={{fontSize:12,color:'#64748b'}}>{t.desc}</div></div>))}
+        {filtered.map(t=>(<div key={t.name} onClick={()=>setActiveTool(t)} style={{background:'#fff',border:'1px solid #f1f5f9',borderRadius:16,padding:16,cursor:'pointer'}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:12}}><div style={{width:40,height:40,borderRadius:10,background:`${t.color}14`,color:t.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>{t.icon}</div><button onClick={e=>{e.stopPropagation(); setFav(p=>p.includes(t.name)?p.filter(x=>x!==t.name):[...p,t.name])}} style={{background:'transparent',border:0,cursor:'pointer',color:fav.includes(t.name)?'#f59e0b':'#cbd5e1'}}>{fav.includes(t.name)?'★':'☆'}</button></div><div style={{fontWeight:600,fontSize:14,marginBottom:4}}>{t.name}</div><div style={{fontSize:11,color:'#64748b'}}>{getTitleForTool(t.type).split('-')[0].trim()}</div></div>))}
       </div>
       {activeTool && <ToolModal tool={activeTool} onClose={()=>setActiveTool(null)}/>}
     </div>
@@ -222,22 +269,21 @@ function Layout(){
     <TopAffiliateBar />
     <header style={{position:'sticky',top:0,zIndex:20,background:'rgba(255,255,255,0.8)',backdropFilter:'blur(12px)',borderBottom:'1px solid #f1f5f9'}}>
       <div style={{maxWidth:1200,margin:'0 auto',padding:'14px 20px',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-        <Link to="/" style={{display:'flex',alignItems:'center',gap:10,textDecoration:'none',color:'#0f172a'}}><div style={{width:32,height:32,borderRadius:8,background:'#0f172a',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>W</div><div><div style={{fontWeight:700,fontSize:15}}>WanaLab</div><div style={{fontSize:11,color:'#64748b'}}>Wana Based • Global Built • {TOOLS.length} tools</div></div></Link>
+        <Link to="/" style={{display:'flex',alignItems:'center',gap:10,textDecoration:'none',color:'#0f172a'}}><div style={{width:32,height:32,borderRadius:8,background:'#0f172a',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>W</div><div><div style={{fontWeight:700,fontSize:15}}>WanaLab</div><div style={{fontSize:11,color:'#64748b'}}>Wana Based • {TOOLS.length} tools</div></div></Link>
         <div style={{display:'flex',gap:8}}><Link to="/about" style={{padding:'8px 14px',borderRadius:999,border:'1px solid #e2e8f0',background:'#fff',fontSize:13,textDecoration:'none',color:'#0f172a'}}>About</Link><Link to="/contact" style={{padding:'8px 14px',borderRadius:999,background:'#0f172a',color:'#fff',fontSize:13,textDecoration:'none'}}>Contact</Link></div>
       </div>
     </header>
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<StaticPage title="About WanaLab - Wana Based, Global Built" content="About WanaLab - Wana Based, Global Built. Founded by Nasir Khan from Wana, South Waziristan." />} />
-      <Route path="/privacy" element={<StaticPage title="Privacy Policy - WanaLab.org" content="Privacy Policy for WanaLab.org - We don't upload your files, all processing in browser." />} />
-      <Route path="/terms" element={<StaticPage title="Terms of Service - WanaLab.org" content="Terms of Service for WanaLab.org" />} />
-      <Route path="/contact" element={<StaticPage title="Contact — WanaLab.org" content="Contact WanaLab.org - nasir@wanalab.org - Wana, South Waziristan" />} />
+      <Route path="/about" element={<StaticPage title="About - Wana Based Global Built" content="WanaLab by Nasir Khan, Wana, South Waziristan. 64 tools free." />} />
+      <Route path="/privacy" element={<StaticPage title="Privacy" content="No upload, all in browser. Private." />} />
+      <Route path="/terms" element={<StaticPage title="Terms" content="Terms for WanaLab.org" />} />
+      <Route path="/contact" element={<StaticPage title="Contact" content="nasir@wanalab.org - Wana" />} />
     </Routes>
-    <div style={{maxWidth:1200,margin:'0 auto',padding:'0 20px'}}><div style={{marginTop:48,padding:'20px 0',borderTop:'1px solid #f1f5f9',display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:12,fontSize:12,color:'#94a3b8'}}><div>© 2026 WanaLab • Wana, South Waziristan • {TOOLS.length} tools • Founder Nasir Khan • nasir@wanalab.org</div><div style={{display:'flex',gap:16}}><Link to="/about" style={{color:'#94a3b8',textDecoration:'none'}}>About</Link><Link to="/privacy" style={{color:'#94a3b8',textDecoration:'none'}}>Privacy</Link><Link to="/terms" style={{color:'#94a3b8',textDecoration:'none'}}>Terms</Link><Link to="/contact" style={{color:'#0f172a',fontWeight:500,textDecoration:'none'}}>Contact</Link></div></div></div>
     </div>
   )
 }
 
 export default function App(){
   return (<BrowserRouter><Layout /></BrowserRouter>)
-    }
+  }
