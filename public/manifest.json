@@ -2,8 +2,8 @@
   "name": "WanaLab.org - Wana Based, Global Built - 64 Tools",
   "short_name": "WanaLab",
   "description": "64 Free Tools from Wana, South Waziristan - Image to WebP, PDF, Stylish Name, Translator Urdu Pashto, Age Calculator - English اردو हिन्दी العربية - Founder Nasir Khan - No Upload, Private",
-  "start_url": "https://wanalab.org/?source=pwa",
-  "scope": "https://wanalab.org/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#4f46e5",
@@ -11,13 +11,13 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "https://wanalab.org/icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://wanalab.org/icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -28,44 +28,37 @@
       "name": "Image to WebP - تصویر", 
       "short_name": "WebP",
       "description": "Convert image to WebP - تصویر کو WebP بنائیں",
-      "url": "https://wanalab.org/tools/image-to-webp", 
-      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+      "url": "/tools/image-to-webp", 
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
     },
     { 
       "name": "Stylish Name - سٹائلش نام", 
       "short_name": "Stylish",
       "description": "Stylish Name Generator - سٹائلش نام بنائیں",
-      "url": "https://wanalab.org/tools/stylish-name", 
-      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+      "url": "/tools/stylish-name", 
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
     },
     { 
       "name": "Age Calculator - عمر کیلکولیٹر", 
       "short_name": "Age",
       "description": "Age Calculator - عمر کیلکولیٹر",
-      "url": "https://wanalab.org/tools/age-calculator", 
-      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+      "url": "/tools/age-calculator", 
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
     },
     { 
       "name": "Urdu Pashto Translator", 
       "short_name": "Translator",
       "description": "Real Urdu Pashto Translator from Wana",
-      "url": "https://wanalab.org/tools/translator-urdu-pashto", 
-      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+      "url": "/tools/translator-urdu-pashto", 
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
     },
     { 
       "name": "QR Generator - QR کوڈ", 
       "short_name": "QR",
       "description": "QR Code Generator",
-      "url": "https://wanalab.org/tools/qr-code-generator", 
-      "icons": [{ "src": "https://wanalab.org/icon-192.png", "sizes": "192x192" }] 
+      "url": "/tools/qr-code-generator", 
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
     }
   ],
-  "categories": ["productivity", "utilities", "education"],
-  "screenshots": [
-    {
-      "src": "https://wanalab.org/og-image.png",
-      "sizes": "1280x720",
-      "type": "image/png"
-    }
-  ]
+  "categories": ["productivity", "utilities", "education"]
 }
