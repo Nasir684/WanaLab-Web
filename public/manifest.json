@@ -5,60 +5,24 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#000000",
   "theme_color": "#4f46e5",
   "lang": "en",
   "dir": "ltr",
+  "id": "/",
   "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "form_factor": "wide", "label": "WanaLab 64 Tools Home" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "form_factor": "narrow", "label": "WanaLab Tools on Mobile" }
   ],
   "shortcuts": [
-    { 
-      "name": "Image to WebP - تصویر", 
-      "short_name": "WebP",
-      "description": "Convert image to WebP - تصویر کو WebP بنائیں",
-      "url": "/tools/image-to-webp", 
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
-    },
-    { 
-      "name": "Stylish Name - سٹائلش نام", 
-      "short_name": "Stylish",
-      "description": "Stylish Name Generator - سٹائلش نام بنائیں",
-      "url": "/tools/stylish-name", 
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
-    },
-    { 
-      "name": "Age Calculator - عمر کیلکولیٹر", 
-      "short_name": "Age",
-      "description": "Age Calculator - عمر کیلکولیٹر",
-      "url": "/tools/age-calculator", 
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
-    },
-    { 
-      "name": "Urdu Pashto Translator", 
-      "short_name": "Translator",
-      "description": "Real Urdu Pashto Translator from Wana",
-      "url": "/tools/translator-urdu-pashto", 
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
-    },
-    { 
-      "name": "QR Generator - QR کوڈ", 
-      "short_name": "QR",
-      "description": "QR Code Generator",
-      "url": "/tools/qr-code-generator", 
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] 
-    }
+    { "name": "Image to WebP - تصویر", "url": "/tools/image-to-webp", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Stylish Name - سٹائلش نام", "url": "/tools/stylish-name", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Age Calculator - عمر", "url": "/tools/age-calculator", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
   ],
   "categories": ["productivity", "utilities", "education"]
 }
