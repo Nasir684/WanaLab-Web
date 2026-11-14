@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "org.wanalab.twa",
+      "sha256_cert_fingerprints": [
+        "57:09:CF:96:63:7B:B0:6B:06:92:76:60:45:6A:2C:70:29:25:CA:DF:67:95:F1:F3:7F:BB:AC:B2:BD:84:68:7A"
+      ]
+    }
+  }
+]
